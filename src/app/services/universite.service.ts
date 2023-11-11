@@ -13,7 +13,7 @@ export class UniversiteService {
 
   getAllUniversites() {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<Universite[]>(environment.url + '/findAllUniversite', { headers });
+    return this.http.get<Universite[]>(environment.url + '/universites', { headers });
   }
 
   getUniversiteById(id: number) {
@@ -21,19 +21,19 @@ export class UniversiteService {
     return this.http.get<Universite>(environment.url + '/universites/' + id, { headers });
   }
 
-  addUniversite(universite:{ numTels: string[]; nom: string; adresseSiege: string; responsable: string; email: string; etat: string; infoSupp: string }) {
+  addUniversite(universite:{ nomUniversite: string; adresse: string}) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<Universite>(environment.url + '/addUniversite', universite, { headers });
+    return this.http.post<Universite>(environment.url + '/universites', universite, { headers });
   }
 
   updateUniversite(id: number, universite: Universite) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.put<Universite>(environment.url + '/editUniversite/' + id, universite, { headers });
+    return this.http.put<Universite>(environment.url + '/universites/' + id, universite, { headers });
   }
 
   deleteUniversite(id: number) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.delete(environment.url + '/deleteUniversite/' + id, { headers });
+    return this.http.delete(environment.url + '/universites/' + id, { headers });
   }
 
   getAllUniversiteEtatActif() {

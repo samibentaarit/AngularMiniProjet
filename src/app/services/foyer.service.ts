@@ -11,6 +11,6 @@ export class FoyerService {
   constructor(private http: HttpClient) { }
   getAllFoyers() {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<Foyer[]>(environment.url + '/findAllFoyer', { headers });
+    return this.http.get<Foyer[]>(environment.url + '/foyer', { headers });
   }
 }

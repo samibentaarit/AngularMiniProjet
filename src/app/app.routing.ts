@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { Register1Component } from './pages/Auth/register1/register1.component';
+import { Login1Component } from './pages/Auth/login1/login1.component';
 
 const routes: Routes =[
   {
@@ -29,7 +31,11 @@ const routes: Routes =[
         loadChildren: () => import('src/app/layouts/auth-layout/auth-layout.module').then(m => m.AuthLayoutModule)
       }
     ]
-  }, {
+  },
+  { path: 'registerr',       component: Register1Component },
+  { path: 'login1',       component: Login1Component },
+
+  {
     path: '**',
     redirectTo: 'dashboard'
   }

@@ -58,33 +58,6 @@ export class LoginComponent {
       console.error('Login failed', error);
     });
   }
-  ////////////////////////////////////////////
-
-
-  onSusbmit() {
-    console.log('Form:', this.loginForm);
-
-    console.log('Submit button clicked!');
-    if (this.loginForm.invalid) {
-      console.log('Form is invalid');
-      return;
-    }
-
-    const email = this.form.email.value;
-    const password = this.form.password.value;
-
-    
-    this.authService.login11(this.email, this.password)
-      .subscribe(response => {
-        // Handle the response as needed (e.g., navigate to a different page)
-        console.log('Login successful', response);
-      }, error => {
-        // Handle login error
-        console.error('Login failed', error);
-      });
-  }
-
-
 
 
 

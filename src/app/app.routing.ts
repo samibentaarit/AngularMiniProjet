@@ -5,8 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-import { Register1Component } from './pages/Auth/register1/register1.component';
-import { Login1Component } from './pages/Auth/login1/login1.component';
+import { Register1Component } from './pages/Auth/oldregister/register1.component';
+import { Login1Component } from './pages/Auth/oldlogin/login1.component';
 
 const routes: Routes =[
   {

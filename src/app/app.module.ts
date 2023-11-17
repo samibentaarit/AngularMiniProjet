@@ -13,8 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { UniversiteComponent, UniversiteDialog } from './pages/universite/universite.component';
-import { Register1Component } from './pages/Auth/register1/register1.component';
-import { Login1Component } from './pages/Auth/login1/login1.component';
+import { Register1Component } from './pages/Auth/oldregister/register1.component';
+import { Login1Component } from './pages/Auth/oldlogin/login1.component';
 
 
 @NgModule({

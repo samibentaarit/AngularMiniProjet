@@ -16,9 +16,9 @@ export class Auth1Service {
   register(firstName: string, lastName: string, email: string, password: string, role?: string): Observable<any> {
     const body = { firstName, lastName, email, password, ...(role && { role }) };
 
-    return this.http.post<any>(`${this.apiUrl}/register`, body)
+    return this.http.post<any>(`${this.apiUrl}/register`, body, { responseType: 'text' as 'json' })
       .pipe(
-        tap(response => this.handleAuthentication(response)),
+        tap(response => this.handleAuthentication11(response)),
         catchError(error => throwError(error))
       );
   }

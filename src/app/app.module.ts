@@ -13,23 +13,29 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { UniversiteComponent, UniversiteDialog } from './pages/universite/universite.component';
+import {BlocComponent, BlocDialog, BlocEditDialog} from './pages/bloc/bloc.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
-    
     HttpClientModule,
     ComponentsModule,
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    BlocComponent,
+    BlocDialog,
+    BlocEditDialog,
 
   ],
   providers: [],

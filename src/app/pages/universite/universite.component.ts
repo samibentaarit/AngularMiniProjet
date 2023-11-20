@@ -55,9 +55,10 @@ export class UniversiteComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      this.getAllUniversites();
+      this.refresh();
     });
   }
+  /*
   aopenEditDialog(
     idUniversite: number,
     nomUniversite: string,
@@ -82,6 +83,8 @@ export class UniversiteComponent implements OnInit {
     }
   });
 }
+*/
+
 openEditDialog(
   idUniversite: number,
   nomUniversite: string,

@@ -15,9 +15,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'uni',           component: UniversiteComponent },
-<<<<<<< HEAD
     {path: 'bloc',          component:BlocComponent}
-=======
     
->>>>>>> 7b20aba4c27f7ed3d6ddd84a95d55c000ee5b6a0
 ];

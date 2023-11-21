@@ -2,7 +2,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Auth1Service } from 'src/app/services/auth1.service';
 
 @Component({
@@ -14,8 +14,22 @@ export class Login1Component {
   email: string;
   password: string;
 
+a:string;
+  constructor(
+    private authService: Auth1Service,
+    private http :HttpClient,
+     private router : Router
+    ,private route: ActivatedRoute 
+   ) {}
 
-  constructor(private authService: Auth1Service,private http :HttpClient, private router : Router ) {}
+  ngOnInit(): void {
+    // Use the ActivatedRoute to get the parameter from the route
+    this.route.paramMap.subscribe(params => {
+     console.log('All Params:', params.keys);  // Log all parameter keys
+     this.a = params.get('a');
+     console.log('a :', this.a);
+   });
+ }
 
   onSubmit() {
     this.authService.login11(this.email, this.password)

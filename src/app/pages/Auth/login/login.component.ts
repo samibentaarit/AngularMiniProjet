@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Auth1Service } from 'src/app/services/auth1.service';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,8 +23,7 @@ export class LoginComponent implements OnInit{
   emailreset: string='';
   newPasswordForm: FormGroup;
   newPassword: string='';
-
-  token: string;
+  token: string='';
   constructor(
     private formBuilder: FormBuilder,
     private authService: Auth1Service,
@@ -43,8 +44,11 @@ export class LoginComponent implements OnInit{
   }
   ngOnInit(): void {
      // Use the ActivatedRoute to get the parameter from the route
-     this.route.params.subscribe(params => {
+     this.route.queryParams.subscribe(params => {
+      console.log(params)
       this.token = params['token']; // Assuming the parameter name is 'token'
+      console.log(this.token)
+
     });
   }
   
@@ -107,12 +111,11 @@ export class LoginComponent implements OnInit{
   onNewPasswordSubmit() {
     // Assuming newPasswordForm is your FormGroup
     const newPasswordValue = this.newPasswordForm.value.newPassword;
-
     // Send a POST request with the new password and the token as a parameter
-    const resetPasswordUrl = 'http://localhost:60082/register/reset-password';
+    const resetPasswordUrl =  environment.url+'/register/reset-password';
     const tokenQueryParam = `?token=${this.token}`;
 
-    this.http.post(resetPasswordUrl + tokenQueryParam, { newPassword: newPasswordValue })
+    this.http.post(resetPasswordUrl + tokenQueryParam, { newPassword: newPasswordValue },{ responseType: 'text' as 'json' })
       .subscribe(
         (response) => {
           // Handle the response as needed

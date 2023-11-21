@@ -13,7 +13,7 @@ export class UniversiteService {
 
   getAllUniversites() {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<Universite[]>(environment.url + '/universites', { headers });
+      return this.http.get<Universite[]>(environment.url + '/universites', { headers });
   }
 
   getUniversiteById(id: number) {

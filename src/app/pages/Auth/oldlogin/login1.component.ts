@@ -29,5 +29,9 @@ export class Login1Component {
   }
 
 
-
+   toggleHiddenInput() {
+    var hiddenInput = document.getElementById("hiddenInput");
+    // Toggle the display property
+    hiddenInput.style.display = (hiddenInput.style.display === 'none') ? 'block' : 'none';
+}
 }

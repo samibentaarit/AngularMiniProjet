@@ -45,6 +45,11 @@ export class Auth1Service {
   }
 
 
+  resetPassword(email: string): Observable<any> {
+    const body = { email };
+    return this.http.post<string>(`${this.apiUrl}/register/password-reset-request`, body, { responseType: 'text' as 'json' })
+  }
+
 
 //////////////////
 login11(email: string, password: string): Observable<any> {
@@ -73,5 +78,6 @@ logout(): void {
   // Remove the authentication token from session storage
   sessionStorage.removeItem('authToken');
 }
+
 
 }

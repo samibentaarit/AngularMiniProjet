@@ -38,9 +38,9 @@
                 <input class="form-control" placeholder="Email" type="email" formControlName="email" [(ngModel)]="email" required>
               </div>
               <!-- Display validation error if email is invalid -->
-              <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="text-danger">
-                <div *ngIf="f.email.errors.required">Email is required.</div>
-                <div *ngIf="f.email.errors.email">Invalid email address.</div>
+              <div *ngIf="form.email.invalid && (form.email.dirty || form.email.touched)" class="text-danger">
+                <div *ngIf="form.email.errors.required">Email is required.</div>
+                <div *ngIf="form.email.errors.email">Invalid email address.</div>
               </div>
             </div>
             <div class="form-group">
@@ -51,8 +51,8 @@
                 <input class="form-control" placeholder="Password" type="password" formControlName="password" [(ngModel)]="password" required>
               </div>
               <!-- Display validation error if password is invalid -->
-              <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)" class="text-danger">
-                <div *ngIf="f.password.errors.required">Password is required.</div>
+              <div *ngIf="form.password.invalid && (form.password.dirty || form.password.touched)" class="text-danger">
+                <div *ngIf="form.password.errors.required">Password is required.</div>
               </div>
             </div>
 
@@ -63,7 +63,7 @@
               </label>
             </div>
             <div class="text-center">
-              <button  type="submit" class="btn btn-primary my-4">Sign in</button>
+              <button type="submit" class="btn btn-primary my-4" [disabled]="loginForm.invalid">Sign in</button>
             </div>
             
           </form>
@@ -79,4 +79,68 @@
       </div>
     </div>
   </div>
+<!-- Additional Form for Entering Email Without Validators -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-transparent pb-5">
+          <div class="text-center text-muted mb-4">
+            <h2>Enter Email</h2>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <form role="form" (ngSubmit)="onEmailSubmit()" [formGroup]="emailForm">
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                </div>
+                <input class="form-control" placeholder="Enter Email" type="email" formControlName="emailreset">
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary my-4" [disabled]="emailForm.invalid">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- New Password Form -->
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-5 col-md-7">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-transparent pb-5">
+          <div class="text-center text-muted mb-4">
+            <h2>Enter New Password</h2>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <form role="form" (ngSubmit)="onNewPasswordSubmit()" [formGroup]="newPasswordForm">
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input class="form-control" placeholder="New Password" type="password" formControlName="newPassword">
+              </div>
+              <!-- Display validation error if new password is invalid -->
+              <div *ngIf="fr.newPassword.invalid && (fr.newPassword.dirty || fr.newPassword.touched)" class="text-danger">
+                <div *ngIf="fr.newPassword.errors.required">New Password is required.</div>
+                <!-- Add additional validation rules if needed -->
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary my-4" [disabled]="newPasswordForm.invalid">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

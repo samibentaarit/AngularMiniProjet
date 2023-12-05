@@ -104,5 +104,9 @@ logout(): void {
   sessionStorage.removeItem('authToken');
 }
 
+get token(){
+  return   sessionStorage.getItem('authToken');
+
+}
 
 }

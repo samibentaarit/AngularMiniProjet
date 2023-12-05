@@ -4,7 +4,6 @@ import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
   firstName: string;

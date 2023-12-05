@@ -16,7 +16,6 @@ import { MatSelectModule } from '@angular/material/select';
 @Component({
   selector: 'app-universite',
   templateUrl: './universite.component.html',
-  styleUrls: ['./universite.component.scss']
 })
 export class UniversiteComponent implements OnInit {
   universites: Universite[]; // Change the type to match your Universite model.

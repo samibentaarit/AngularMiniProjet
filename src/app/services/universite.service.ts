@@ -11,9 +11,10 @@ export class UniversiteService {
 
   constructor(private http: HttpClient) {}
 
-  getAllUniversites() {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-      return this.http.get<Universite[]>(environment.url + '/universites', { headers });
+  getAllUniversites(): Observable<any> {
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
+    return this.http.get<any>(environment.url + '/universites', { headers });
   }
 
   getUniversiteById(id: number) {

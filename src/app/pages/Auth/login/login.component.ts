@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit{
   loginForm: FormGroup;
@@ -21,8 +20,6 @@ export class LoginComponent implements OnInit{
 
   emailForm: FormGroup;
   emailreset: string='';
-  newPasswordForm: FormGroup;
-  newPassword: string='';
   token: string='';
   constructor(
     private formBuilder: FormBuilder,
@@ -35,12 +32,8 @@ export class LoginComponent implements OnInit{
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
-    this.emailForm = this.formBuilder.group({
-      emailreset: ['@gmail.com', [Validators.required, Validators.email]], // Set your default email here
-    });
-    this.newPasswordForm = this.formBuilder.group({
-      newPassword: ['', [Validators.required]], // Set your default password here
-    });
+
+
   }
   ngOnInit(): void {
      // Use the ActivatedRoute to get the parameter from the route
@@ -57,13 +50,8 @@ export class LoginComponent implements OnInit{
   get form() {
     return this.loginForm.controls;
   }
-  // Declare 'f' property
-  get f() {
-    return this.emailForm.controls;
-  }
-  get fr() {
-    return this.newPasswordForm.controls;
-  }
+
+
   
   onSubmit() {
     console.log('Form:', this.loginForm);
@@ -89,42 +77,6 @@ export class LoginComponent implements OnInit{
   }
 
 
-  onEmailSubmit() {
-    console.log('Form:', this.emailForm);
-    // Handle the form submission logic here
-    console.log('', this.emailForm.value.emailreset);
-    // You can send the email value to a service or perform any other actions as needed
-    this.authService.resetPassword(this.emailForm.value.emailreset).subscribe(response => {
-      // Handle successful login, e.g., store token, navigate to home page, etc.
-      console.log('Email submitted successfully', response);
-    }, error => {
-      if (error.status === 404) {
-        console.error('User not found', error);
-      }  else {
-    console.error('An unexpected error occurred', error);
-    // Display a generic error message
-  }
-  });
-  }
 
 
-  onNewPasswordSubmit() {
-    // Assuming newPasswordForm is your FormGroup
-    const newPasswordValue = this.newPasswordForm.value.newPassword;
-    // Send a POST request with the new password and the token as a parameter
-    const resetPasswordUrl =  environment.url+'/register/reset-password';
-    const tokenQueryParam = `?token=${this.token}`;
-
-    this.http.post(resetPasswordUrl + tokenQueryParam, { newPassword: newPasswordValue },{ responseType: 'text' as 'json' })
-      .subscribe(
-        (response) => {
-          // Handle the response as needed
-          console.log('Password reset successful', response);
-        },
-        (error) => {
-          // Handle the error
-          console.error('Password reset failed', error);
-        }
-      );
-  }
 }

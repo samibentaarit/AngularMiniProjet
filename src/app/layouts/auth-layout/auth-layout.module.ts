@@ -7,6 +7,8 @@ import { AuthLayoutRoutes } from './auth-layout.routing';
 import { LoginComponent } from '../../pages/Auth/login/login.component';
 import { RegisterComponent } from '../../pages/Auth/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ForgetPasswordComponent } from 'src/app/pages/Auth/forget-password/forget-password.component';
+import { NewPassComponent } from 'src/app/pages/Auth/new-pass/new-pass.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     LoginComponent,
     RegisterComponent,
+    ForgetPasswordComponent,
+    NewPassComponent
   ]
 })
 export class AuthLayoutModule { }

@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class Auth1Service {
   private apiUrl = 'http://localhost:60082';
+  roleAs: string;
 
   constructor(private http: HttpClient) {}
 
@@ -62,8 +63,22 @@ login11(email: string, password: string): Observable<any> {
     );
 }
 
-private handleAuthentication11(token: string): void {
+handleAuthentication11(token: string): void {
   if (token) {
+    const decodedToken: any = jwtDecode(token);
+
+    // Extract user information
+    const firstName = decodedToken.firstName;
+    const lastName = decodedToken.lastName;
+    const role = decodedToken.role;
+    const email = decodedToken.email;
+
+    // Save user information in session storage
+    sessionStorage.setItem('firstName', firstName);
+    sessionStorage.setItem('lastName', lastName);
+    sessionStorage.setItem('role', role);
+    sessionStorage.setItem('email', email);
+
     // Save the token in session storage
     sessionStorage.setItem('authToken', token);
 
@@ -74,6 +89,16 @@ private handleAuthentication11(token: string): void {
   }
 }
 
+getRole(role:String) {
+      this.roleAs = sessionStorage.getItem('role');
+          if(this.roleAs==role)
+        return true;
+      return false
+    }
+
+_is_logged(): boolean {
+    return !!sessionStorage.getItem("authToken");
+    }
 logout(): void {
   // Remove the authentication token from session storage
   sessionStorage.removeItem('authToken');

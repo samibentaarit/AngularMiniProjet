@@ -8,7 +8,6 @@ import { Auth1Service } from 'src/app/services/auth1.service';
 @Component({
   selector: 'app-login1',
   templateUrl: './login1.component.html',
-  styleUrls: ['./login1.component.scss'],
 })
 export class Login1Component {
   email: string;

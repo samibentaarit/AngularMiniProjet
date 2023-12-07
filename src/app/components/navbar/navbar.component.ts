@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
+import {SearchService} from "../../services/Search.Service";
 
 @Component({
   selector: 'app-navbar',
@@ -12,10 +13,11 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router) {
+  constructor(location: Location,  private element: ElementRef, private router: Router ,private searchService: SearchService) {
     this.location = location;
   }
-
+  onSearch(term: string) {
+    this.searchService.updateSearchTerm(term);}
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
   }

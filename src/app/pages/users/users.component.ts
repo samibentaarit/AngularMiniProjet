@@ -1,6 +1,7 @@
 // user.component.ts
 
 import { Component, OnInit } from '@angular/core';
+import { cp } from 'fs';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  users: User[] = [];
+  users = [];
 
   filteredData: any[] = [];
   searchText = '';
@@ -39,9 +40,18 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users);
-      console.log(this.users);
+    this.userService.getUsers().subscribe(
+      (users:User[]) => {
+        console.log(users);
+        this.users = users;
+        this.filteredData = this.users;
+        console.log(this.users);
+        console.log(this.filteredData)
+          },
+          (err:any) =>{
+          console.log(err)
+        } 
+      );
   }
 
   addUser(user: User): void {

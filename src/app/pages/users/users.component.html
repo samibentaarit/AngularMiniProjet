@@ -47,10 +47,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let user of users">
+                  <tr *ngFor="let user of filteredData">
                     <th scope="row">{{ user.id }}</th>
                     <td>{{ user.firstName }}</td>
-                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.lastName }}</td> 
                     <td>{{ user.email }}</td>
                     <td>{{ user.role }}</td>
                     <td>{{ user.isEnabled ? 'Yes' : 'No' }}</td>

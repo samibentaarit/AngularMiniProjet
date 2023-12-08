@@ -61,17 +61,14 @@ import {QRCodeModule} from "angular2-qrcode";
 
     Register1Component,
     Login1Component,
-<<<<<<< HEAD
     
-=======
     EtudiantEditDialog,
       EtudiantDialog,
 
 
 
->>>>>>> fd5467a6e891571082f76cfe7735387b5936d3f2
   ],
-  providers: [ { provide: 'JSObject', useValue: jsPDF }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

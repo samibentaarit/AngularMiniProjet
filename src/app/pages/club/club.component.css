@@ -1,0 +1,14 @@
+.card {
+  width: 18rem;
+  transition: transform 0.3s ease;
+}
+
+.bg-gradient-pink {
+  background: linear-gradient(to right, #ff4382, #ff6f61);
+}
+
+.zoomed-card {
+  transform: scale(1.1);
+}
+
+/*# sourceMappingURL=club.component.css.map */

@@ -6,7 +6,6 @@ import { Auth1Service } from 'src/app/services/auth1.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register1.component.html',
-  styleUrls: ['./register1.component.scss'],
 })
 export class Register1Component {
   firstName: string;

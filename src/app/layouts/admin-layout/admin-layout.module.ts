@@ -17,9 +17,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { UniversiteComponent, UniversiteDialog, UniversiteEditDialog } from 'src/app/pages/universite/universite.component';
+
 import { ConfirmDialogComponent } from 'src/app/variables/popup/popup.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {Club} from "../../models/club";
+import {ClubComponent,ClubDialog,ClubEditDialog} from "../../pages/club/club.component";
+import {
+  CommentaireComponent,
+  DetailUniversiteComponent
+} from "../../pages/detail-universite/detail-universite.component";
+import {QRCodeModule} from "angular2-qrcode";
+import { UsersComponent } from 'src/app/pages/users/users.component';
 
 @NgModule({
   imports: [
@@ -35,6 +44,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
+    QRCodeModule
   ],
   declarations: [
     DashboardComponent,
@@ -47,6 +57,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     UniversiteDialog,
     UniversiteEditDialog,
     ConfirmDialogComponent,
+    UsersComponent,
+
+
+    ClubDialog,
+    ClubEditDialog
+  ,ClubComponent,DetailUniversiteComponent,CommentaireComponent
   ]
 })
 

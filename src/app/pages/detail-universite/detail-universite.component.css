@@ -1,0 +1,10 @@
+.card.zoomed-card {
+  transform: scale(1.1); /* Adjust the scale value as needed */
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.card.bg-gradient-pink.shadow.mb-4 {
+  background: linear-gradient(to right, #ff66b2, #ff0066);
+}
+
+/*# sourceMappingURL=detail-universite.component.css.map */

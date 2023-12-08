@@ -7,6 +7,8 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { UniversiteComponent } from 'src/app/pages/universite/universite.component';
 import {BlocComponent} from "../../pages/bloc/bloc.component";
+import {BlocDetailsComponent} from "../../pages/bloc/bloc-details/bloc-details.component";
+import {BibliothequeComponent} from "../../pages/bibliotheque/bibliotheque.component";
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -15,9 +17,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'uni',           component: UniversiteComponent },
-<<<<<<< HEAD
-    {path: 'bloc',          component:BlocComponent}
-=======
-    
->>>>>>> 7b20aba4c27f7ed3d6ddd84a95d55c000ee5b6a0
+    {path: 'bloc',          component:BlocComponent},
+  { path: 'bibliotheque/:idBloc', component: BibliothequeComponent },
+    { path: 'bloc-details/:idBloc', component: BlocDetailsComponent },
+    {path: 'biblio',          component:BibliothequeComponent}
+
 ];

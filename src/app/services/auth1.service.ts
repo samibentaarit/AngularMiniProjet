@@ -26,14 +26,14 @@ export class Auth1Service {
    handleAuthentication(response: any): void {
     // Assuming your backend sends an authentication token in the response
     const authToken = response.error.text;
-   
+
     if (authToken) {
       const authToken =""
 
       const decodedToken: any = jwtDecode(authToken);
       // Store the authentication token in local storage
       localStorage.setItem('authToken', authToken);
-  
+
       // You can also store other user details if needed
        localStorage.setItem('userInfo', JSON.stringify(decodedToken));
 
@@ -43,7 +43,6 @@ export class Auth1Service {
       console.log(response.message);
     }
   }
-
 
 
 //////////////////

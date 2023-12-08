@@ -4,8 +4,8 @@ import {BlocService} from "../../services/bloc.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Chambre} from "../../models/chambre";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ChambreService} from "../../services/chambre.service";
 import {ConfirmDialogComponent} from "../../variables/popup/popup.component";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-bloc',
@@ -13,11 +13,13 @@ import {ConfirmDialogComponent} from "../../variables/popup/popup.component";
   styleUrls: ['./bloc.component.scss']
 })
 export class BlocComponent implements OnInit {
-  blocs: Bloc[]; // Change the type to match your Bloc model.
+  blocs: Bloc[];
 
   constructor(
     private blocService: BlocService
-    ,public dialog: MatDialog) {}
+    ,public dialog: MatDialog,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getAllBlocs();
@@ -42,8 +44,6 @@ export class BlocComponent implements OnInit {
       width: '500px',
       data: {
         nomBloc: '',
-        adresse: '',
-        chambre: null, // You can pass an chambre object here if needed
       }
     });
 
@@ -55,16 +55,14 @@ export class BlocComponent implements OnInit {
   aopenEditDialog(
     idBloc: number,
     nomBloc: string,
-    adresse: string,
-    chambre: Chambre
+    capaciteBloc:number,
   ): void {
     const dialogRef = this.dialog.open(BlocEditDialog, {
       width: '500px',
       data: {
         idBloc: idBloc,
         nomBloc: nomBloc,
-        adresse: adresse,
-        chambre: chambre // You can pass an chambre object here if needed
+        capaciteBloc: capaciteBloc,
       }
     });
     dialogRef.afterClosed().subscribe((result: Bloc) => {
@@ -79,14 +77,14 @@ export class BlocComponent implements OnInit {
   openEditDialog(
     idBloc: number,
     nomBloc: string,
-    chambre: Chambre
+    capaciteBloc: number,
   ): void {
     const dialogRef = this.dialog.open(BlocEditDialog, {
       width: '500px',
       data: {
         idBloc: idBloc,
         nomBloc: nomBloc,
-        chambre: chambre,
+        capaciteBloc: capaciteBloc,
       },
     });
     dialogRef.afterClosed().subscribe((result: Bloc) => {
@@ -109,7 +107,7 @@ export class BlocComponent implements OnInit {
     });
   }
   deleteBloc(idBloc: number): void {
-    const confirmDelete = confirm('Are you sure you want to delete this university?');
+    const confirmDelete = confirm('Are you sure you want to delete this bloc?');
 
     if (confirmDelete) {
       this.blocService.deleteBloc(idBloc).subscribe(
@@ -123,7 +121,14 @@ export class BlocComponent implements OnInit {
       );
     }
   }
+
+  detailsBloc(idBloc: number) {
+    this.router.navigate(['/bloc-details', idBloc]);
+  }
 }
+
+
+
 
 
 
@@ -135,55 +140,37 @@ export class BlocComponent implements OnInit {
 /////////////////////////////////////////////////////
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'bloc-dialog',
   templateUrl: 'bloc-dialog.html',
 })
-// tslint:disable-next-line:component-class-suffix
 export class BlocDialog implements OnInit {
-  // Add the necessary properties for bloc creation dialog
-
   blocForm: FormGroup;
-  chambres:Chambre[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<BlocDialog>,
     @Inject(MAT_DIALOG_DATA) public data: Bloc,
     private formBuilder: FormBuilder,
     private blocService: BlocService,
-    private chambreService: ChambreService,
-
   ) {}
 
   ngOnInit(): void {
-    this.chambreService.getAllChambres().subscribe(
-      (chambres) => {
-        this.chambres = chambres;
-      },
-      (error) => {
-        console.error(error);
-        // Handle error here
-      }
-    );
+
 
     // Create the form group with custom validation for required fields
     this.blocForm = this.formBuilder.group({
       nomBloc: [this.data.nomBloc, Validators.required],
-      chambre: [this.data.chambre, Validators.required], // Add the chambre field with appropriate validation
-    });
-  }
-
+      capaciteBloc: [this.data.capaciteBloc, Validators.required]
+  })}
 
   submit() {
     if (this.blocForm.invalid) {
       return;
     }
-    // Customize the submission logic for adding a bloc
-    const bloc: {chambre:Chambre;  nomBloc: string;  capaciteBloc: number;
-    } = {
-      nomBloc: this.data.nomBloc,
-      chambre:this.data.chambre,
-      capaciteBloc:this.data.capaciteBloc
+
+    const formData = this.blocForm.value;
+    const bloc: { nomBloc: string; capaciteBloc: number } = {
+      nomBloc: formData.nomBloc,
+      capaciteBloc: formData.capaciteBloc,
     };
 
     this.blocService.addBloc(bloc).subscribe((res: any) => {
@@ -192,13 +179,9 @@ export class BlocDialog implements OnInit {
   }
 
   onCancel(): void {
-    // Close the dialog without any action
     this.dialogRef.close();
   }
-
 }
-
-
 
 
 
@@ -208,37 +191,22 @@ export class BlocDialog implements OnInit {
 })
 export class BlocEditDialog implements OnInit {
   blocForm: FormGroup;
-  chambres: Chambre[] = [];
-  selectedChambre: Chambre;
 
   constructor(
     public dialogRef: MatDialogRef<BlocEditDialog>,
     @Inject(MAT_DIALOG_DATA) public data: Bloc,
     private formBuilder: FormBuilder,
-    private chambreService: ChambreService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.chambreService.getAllChambres().subscribe(
-      (chambres) => {
-        this.chambres = chambres;
 
-        // Set the initial value for the "chambre" form control and selectedChambre
-        const initialChambre = this.chambres.find(f => f.idChambre === this.data.chambre.idChambre);
-        this.blocForm.get('chambre')?.setValue(initialChambre);
-        this.selectedChambre = initialChambre;
-      },
-      (error) => {
-        console.error(error);
-        // Handle error here
-      }
-    );
+
 
     this.blocForm = this.formBuilder.group({
       idBloc: [this.data.idBloc, Validators.required],
       nomBloc: [this.data.nomBloc, Validators.required],
-      chambre: [null, Validators.required],
+      capaciteBloc: [this.data.capaciteBloc,Validators.required]
     });
   }
 
@@ -247,7 +215,7 @@ export class BlocEditDialog implements OnInit {
       width: '300px',
       data: {
         title: 'Confirmer la modification',
-        message: 'Êtes-vous sûr de vouloir modifier cette université ?',
+        message: 'Êtes-vous sûr de vouloir modifier ce bloc ?',
         confirmText: 'Confirmer',
         confirmColor: 'primary',
       },
@@ -259,8 +227,7 @@ export class BlocEditDialog implements OnInit {
           idBloc: this.data.idBloc,
           nomBloc: this.blocForm.value.nomBloc,
           capaciteBloc: this.blocForm.value.capaciteBloc,
-          chambre: this.blocForm.value.chambre,
-        };
+                };
 
         this.dialogRef.close(updatedBloc);
       }

@@ -94,7 +94,6 @@ export class BibliothequeComponent {
     });
   }
 
-  // bibliotheque.component.ts
 
   deleteBibliotheque(idBibliotheque: number): void {
     const confirmDelete = confirm('Are you sure you want to delete this bibliotheque?');

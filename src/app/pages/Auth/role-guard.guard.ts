@@ -17,5 +17,5 @@ export class RoleGuardGuard implements CanActivate {
         }
         this.authService.logout();
     return false;
-    }
+    } 
 }

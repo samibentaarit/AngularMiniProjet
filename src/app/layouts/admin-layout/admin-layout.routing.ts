@@ -10,6 +10,7 @@ import {BlocComponent} from "../../pages/bloc/bloc.component";
 import { AuthentificationGuard } from 'src/app/pages/Auth/authentification.guard';
 import { RoleGuardGuard } from 'src/app/pages/Auth/role-guard.guard';
 import { ForgetPasswordComponent } from 'src/app/pages/Auth/forget-password/forget-password.component';
+import { UsersComponent } from 'src/app/pages/users/users.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -19,5 +20,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',           component: MapsComponent },
     { path: 'uni',           component: UniversiteComponent, canActivate:[AuthentificationGuard,RoleGuardGuard] },
     {path: 'bloc',          component:BlocComponent},
+    { path: 'users',    component:UsersComponent},
+
   
 ];

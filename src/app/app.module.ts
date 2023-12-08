@@ -41,6 +41,7 @@ import { Login1Component } from './pages/Auth/oldlogin/login1.component';
 
     Register1Component,
     Login1Component,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

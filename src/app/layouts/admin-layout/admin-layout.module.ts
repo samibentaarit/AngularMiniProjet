@@ -21,6 +21,7 @@ import { ConfirmDialogComponent } from 'src/app/variables/popup/popup.component'
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ForgetPasswordComponent } from 'src/app/pages/Auth/forget-password/forget-password.component'; 
+import { UsersComponent } from 'src/app/pages/users/users.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { ForgetPasswordComponent } from 'src/app/pages/Auth/forget-password/forg
     UniversiteDialog,
     UniversiteEditDialog,
     ConfirmDialogComponent,
-    
+    UsersComponent,
+
 
   ]
 })

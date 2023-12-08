@@ -1,72 +1,79 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-    <div class="container-fluid">
-      <div class="header-body">
-        <!---->
-      
-        <!-- Table --> 
-        <div class="row">
-          <div class="col">
-            <div class="card shadow">
-              <div class="card-header bg-white border-0">
-                <div class="row align-items-center">
-                  <div class="col-8">
-                    <h3 class="mb-0">Users</h3> <div class="input-group mb-3">
-                      <input
-                              type="search"
-                              class="form-control mr-sm-2"
-                              placeholder="Rechercher par immatriculation, marque/modèle, nombre de places"
-                              [(ngModel)]="searchText"
-                              (keyup)="onSearchChange()"
-                      />
-                  </div>
-                  <div class="col-4 text-right">
-                    <button type="button" class="btn btn-info">
-                      <i class="fas fa-plus" style="margin-right: 10px;"></i>Add User
-                    </button>
-                  </div>
+  <div class="container-fluid">
+    <div class="header-body">
+      <!---->
+
+      <!-- Table -->
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row mb-3">
+                <div class="col-12 align-items-center">
+                  <!-- Section Heading -->
+                  <h3 class="mb-0 text-center">Users</h3>
                 </div>
               </div>
-              <div class="table-responsive">
-                <table class="table align-items-center table-flush">
-                  <thead class="thead-light">
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">First Name</th>
-                      <th scope="col">Last Name</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Role</th>
-                      <th scope="col">Enabled</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let user of filteredData">
-                      <th scope="row">{{ user.id }}</th>
-                      <td>{{ user.firstName }}</td>
-                      <td>{{ user.lastName }}</td>
-                      <td>{{ user.email }}</td>
-                      <td>{{ user.role }}</td>
-                      <td>{{ user.isEnabled ? 'Yes' : 'No' }}</td>
-                      <td class="text-right">
-                        <div ngbDropdown placement="bottom-right">
-                          <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                            <i class="fas fa-ellipsis-v"></i>
-                          </a>
-                          <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" (click)="openEditDialog(user.id, user.firstName, user.lastName, user.email, user.role, user.isEnabled)">Edit</a>
-                            <a class="dropdown-item" (click)="deleteUser(user.id)">Delete</a>
-                          </div>
-                        </div>
-                      </td>
-                      
-                    </tr>
-                  </tbody>
-                </table>
+              <hr />
+              
+              <!-- Search and Add User Section -->
+              <div class="input-group mb-3 row">
+                <div class="col-md-10">
+                  <!-- Search Input -->
+                  <input type="search" class="form-control mr-sm-2"
+                    placeholder="Rechercher par immatriculation, marque/modèle, nombre de places"
+                    [(ngModel)]="searchText" (keyup)="onSearchChange()" />
+                </div>
+                <div class="col-md-2 text-right">
+                  <!-- Add User Button -->
+                  <button type="button" class="btn btn-info">
+                    <i class="fas fa-plus" style="margin-right: 10px;"></i>Add User
+                  </button>
+                </div>
               </div>
+              
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Enabled</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of users">
+                    <th scope="row">{{ user.id }}</th>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.isEnabled ? 'Yes' : 'No' }}</td>
+                    <td class="text-right">
+                      <div ngbDropdown placement="bottom-right">
+                        <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item"
+                            (click)="openEditDialog(user.id, user.firstName, user.lastName, user.email, user.role, user.isEnabled)">Edit</a>
+                          <a class="dropdown-item" (click)="deleteUser(user.id)">Delete</a>
+                        </div>
+                      </div>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

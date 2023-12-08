@@ -12,6 +12,13 @@ import { FoyerService } from 'src/app/services/foyer.service';
 import { ConfirmDialogComponent } from 'src/app/variables/popup/popup.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import {RouterLink} from "@angular/router";
+import {SearchService} from "../../services/Search.Service";
+import {ClubService} from "../../services/club.service";
+import { Club } from 'src/app/models/club';
+import {  Input, Output, EventEmitter } from '@angular/core';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-universite',
@@ -19,27 +26,107 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class UniversiteComponent implements OnInit {
   universites: Universite[]; // Change the type to match your Universite model.
+  averageFoyerCapacity: number;
+  searchTerm: string = '';
+  filteredUniversites: Universite[];
+clubs : Club [] ;
 
   constructor(
     private universiteService: UniversiteService
-    ,public dialog: MatDialog) {}
+    , private foyerService: FoyerService
+    , public dialog: MatDialog,
+    private searchService: SearchService
+  ,private clubService :ClubService){
+  }
 
   ngOnInit() {
     this.getAllUniversites();
+    this.loadAverageFoyerCapacity();
+    this.getAllClubs();
+    this.generatePdf() ;
+
   }
+  generatePdf() {
+    const jsPDF = require('jspdf');
+    require('jspdf-autotable');
+
+    const pdf = new jsPDF();
+    const pageTitle = 'Liste des Universités';
+    const header = [['ID', 'Nom de l\'Université', 'Adresse', 'Nom du Foyer']];
+
+    // Ajouter des données (par exemple, utiliser filteredUniversites)
+    const data = this.filteredUniversites.map(universite => [
+      universite.idUniversite.toString(),
+      universite.nomUniversite,
+      universite.adresse,
+      universite.foyer?.nomFoyer || '', // Si foyer est null, affiche une chaîne vide
+    ]);
+
+    pdf.autoTable({
+      head: header,
+      body: data,
+      startY: 40,
+    });
+
+    pdf.text(pageTitle, 14, 20);
+
+    // Sauvegarder le PDF
+    pdf.save('liste_universites.pdf');
+  }
+
+  // ...
+
+  assignClubToUniversity(universityId: number, clubId: number): void {
+    this.universiteService.assignClubToUniversity(universityId, clubId).subscribe(
+      (response) => {
+        console.log('Assignation réussie', response);
+        // Vous pouvez mettre à jour votre interface utilisateur ici si nécessaire
+      },
+      (error) => {
+        console.error('Erreur lors de l\'assignation', error);
+        // Gérez les erreurs ici
+      }
+    );}
+  search() {
+    // Filtrer les universités basées sur le terme de recherche
+    this.filteredUniversites = this.universites.filter(universite =>
+      universite.nomUniversite.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  loadAverageFoyerCapacity() {
+    this.foyerService.getAverageFoyerCapacity().subscribe(data => {
+      this.averageFoyerCapacity = data;
+    });
+  }
+
   refresh() {
     this.getAllUniversites();
   }
 
+
+
   getAllUniversites() {
     this.universiteService.getAllUniversites().subscribe(
       (data: any) => {
-        this.universites = data; // Assuming your service returns an array of Universite objects.
+        this.universites = data;
+        this.filteredUniversites = this.universites; // Initialiser la liste filtrée avec toutes les universités
       },
       (error) => {
         console.error('Error loading Universites: ', error);
       }
     );
+  }
+  getAllClubs() {
+    this.clubService.getAllClubs().subscribe(
+      (data: any) => {
+        this.clubs = data; // Assuming your service returns an array of Universite objects.
+      },
+      (error) => {
+        console.error('Error loading Universites: ', error);
+      }
+    );
+
   }
 
   openDialog(): void {
@@ -133,6 +220,9 @@ deleteUniversite(idUniversite: number): void {
     );
   }
 }
+
+
+  protected readonly RouterLink = RouterLink;
 }
 
 
@@ -175,7 +265,7 @@ export class UniversiteDialog implements OnInit {
         // Handle error here
       }
     );
-    
+
     // Create the form group with custom validation for required fields
     this.universiteForm = this.formBuilder.group({
       nomUniversite: [this.data.nomUniversite, Validators.required],
@@ -183,13 +273,13 @@ export class UniversiteDialog implements OnInit {
       foyer: [this.data.foyer, Validators.required], // Add the foyer field with appropriate validation
     });
   }
-  
-  
+
+
   submit() {
     if (this.universiteForm.invalid) {
       return;
     }
-    // Customize the submission logic for adding a universite
+    // Customize the submission logic for adding  universite
     const universite: {foyer:Foyer;  nomUniversite: string; adresse: string; } = {
       nomUniversite: this.data.nomUniversite,
       adresse: this.data.adresse,
@@ -226,7 +316,7 @@ export class UniversiteEditDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Universite,
     private formBuilder: FormBuilder,
     private foyerService: FoyerService,
-    private dialog: MatDialog 
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -253,32 +343,36 @@ export class UniversiteEditDialog implements OnInit {
     });
   }
 
-  submitEdit() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '300px',
-      data: {
-        title: 'Confirmer la modification',
-        message: 'Êtes-vous sûr de vouloir modifier cette université ?',
-        confirmText: 'Confirmer',
-        confirmColor: 'primary',
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result) {
-        const updatedUniversite: Universite = {
-          idUniversite: this.data.idUniversite,
-          nomUniversite: this.universiteForm.value.nomUniversite,
-          adresse: this.universiteForm.value.adresse,
-          foyer: this.universiteForm.value.foyer,
-        };
-
-        this.dialogRef.close(updatedUniversite);
-      }
-    });
-  }
+  // submitEdit() {
+  //   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+  //     width: '300px',
+  //     data: {
+  //       title: 'Confirmer la modification',
+  //       message: 'Êtes-vous sûr de vouloir modifier cette université ?',
+  //       confirmText: 'Confirmer',
+  //       confirmColor: 'primary',
+  //     },
+  //   });
+  //
+  //   dialogRef.afterClosed().subscribe((result: boolean) => {
+  //     if (result) {
+  //       const updatedUniversite: Universite = {
+  //         idUniversite: this.data.idUniversite,
+  //         nomUniversite: this.universiteForm.value.nomUniversite,
+  //         adresse: this.universiteForm.value.adresse,
+  //         foyer: this.universiteForm.value.foyer,
+  //       };
+  //
+  //       this.dialogRef.close(updatedUniversite);
+  //     }
+  //   });
+  // }
 
   onCancel(): void {
     this.dialogRef.close();
   }
+
+
+
+
 }

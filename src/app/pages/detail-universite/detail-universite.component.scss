@@ -1,0 +1,27 @@
+// Add this to your global styles or component-specific styles
+
+.card {
+  &.zoomed-card {
+    transform: scale(1.1); /* Adjust the scale value as needed */
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+  }
+
+  // Add other styles for non-zoomed cards if needed
+}
+
+.bg-gradient-pink {
+  // Add styles for the pink gradient background
+}
+.card {
+  &.bg-gradient-pink {
+    &.shadow {
+      &.mb-4 {
+        background: linear-gradient(to right, #ff66b2, #ff0066); // Exemple de dégradé de rose foncé
+        // Ajoutez d'autres propriétés SASS au besoin
+      }
+    }
+  }
+}
+// app-commentaire.component.scss
+
+

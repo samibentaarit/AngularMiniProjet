@@ -1,60 +1,66 @@
+<!-- university.component.html -->
+
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-    <div class="container-fluid">
-      <div class="header-body">
-        
-        <!-- Table -->
-        <div class="row">
-          <div class="col">
-            <div class="card shadow">
-              <div class="card-header bg-white border-0">
-                <div class="row align-items-center">
-                  <div class="col-8">
-                    <h3 class="mb-0">Universities</h3>
-                  </div>
-                  <div class="col-4 text-right">
-                    <button type="button" class="btn btn-info" (click)="openDialog()">
-                      <i class="fas fa-plus" style="margin-right: 10px;"></i>Ajouter une Universite
-                  </button>
-                    <a class="btn btn-sm btn-primary" (click)="openDialog()">Ajouter une Universite</a>
-                  </div>
-                </div>
-              </div>
-              <div class="table-responsive">
-                <table class="table align-items-center table-flush">
-                  <thead class="thead-light">
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">University Name</th>
-                      <th scope="col">Address</th>
-                      <th scope="col">Nom Foyer</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let universite of universites">
-                      <th scope="row">{{ universite.idUniversite }}</th>
-                      <td>{{ universite.nomUniversite }}</td>
-                      <td>{{ universite.adresse }}</td>
-                      <td>{{ universite.foyer?.nomFoyer }}</td>
-                      <td class="text-right">
-                        <div ngbDropdown placement="bottom-right">
-                          <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                            <i class="fas fa-ellipsis-v"></i>
-                          </a>
-                          <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" (click)="openEditDialog(universite.idUniversite, universite.nomUniversite, universite.adresse, universite.foyer)">Edit</a>
-                            <a class="dropdown-item" (click)="deleteUniversite(universite.idUniversite)">Delete</a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+  <div class="container-fluid">
+    <div class="header-body">
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Rechercher par nom d'université" [(ngModel)]="searchTerm" (input)="search()">
+        </div>
+      </div>
+      <button type="button" class="btn btn-info" (click)="generatePdf()">
+        <i class="fas fa-download" style="margin-right: 10px;"></i> Télécharger en PDF
+      </button>
+      <!-- Add University Button -->
+      <div class="row">
+        <div class="col">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <button type="button" class="btn btn-info" (click)="openDialog()">
+              <i class="fas fa-plus" style="margin-right: 10px;"></i> Ajouter une Université
+            </button>
+<!--            <p>La moyenne de la capacité des foyers pour toutes les universités est : {{ averageFoyerCapacity }}</p>-->
           </div>
         </div>
       </div>
+
+      <!-- University Cards -->
+      <div class="row">
+        <div class="col-lg-6" *ngFor="let universite of filteredUniversites">
+          <div class="card bg-gradient-pink shadow mb-4">
+            <!-- Image de fond de la carte -->
+            <div class="card-body text-white">
+              <h2 class="card-title">University Details</h2>
+              <p class="card-text">ID: {{ universite.idUniversite }}</p>
+              <p class="card-text">University Name: {{ universite.nomUniversite }}</p>
+              <p class="card-text">Address: {{ universite.adresse }}</p>
+              <p class="card-text">Nom Foyer: {{ universite.foyer?.nomFoyer }}</p>
+              <!-- Ajoutez d'autres détails et styles selon votre préférence -->
+
+              <!-- Liste des clubs avec possibilité de sélection -->
+
+              <div class="card-footer bg-transparent border-0">
+                <!-- Bouton de détail -->
+                <button mat-raised-button color="primary" style="background-color: #4CAF50;" [routerLink]="['/detail', universite.idUniversite]">Détails</button>
+
+                <!-- Options Edit et Delete -->
+                <div ngbDropdown placement="bottom-right">
+                  <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                    <i class="fas fa-ellipsis-v"></i>
+                  </a>
+                  <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" (click)="openEditDialog(universite.idUniversite, universite.nomUniversite, universite.adresse, universite.foyer)">Edit</a>
+                    <a class="dropdown-item" (click)="deleteUniversite(universite.idUniversite)">Delete</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <app-club></app-club>
     </div>
   </div>
-  
+</div>

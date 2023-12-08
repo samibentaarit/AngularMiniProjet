@@ -7,6 +7,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { Register1Component } from './pages/Auth/oldregister/register1.component';
 import { Login1Component } from './pages/Auth/oldlogin/login1.component';
+import {EtudiantComponent} from "./pages/etudiant/etudiant.component";
 
 const routes: Routes =[
   {
@@ -32,9 +33,9 @@ const routes: Routes =[
       }
     ]
   },
-  { path: 'registerr',       component: Register1Component },
+  { path: 'regisrter',       component: Register1Component },
   { path: 'login1',       component: Login1Component },
-
+  { path: 'etudiant',       component: EtudiantComponent },
   {
     path: '**',
     redirectTo: 'dashboard'

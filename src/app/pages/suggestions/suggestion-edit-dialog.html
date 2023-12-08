@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Modifier Suggestion</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form class="foyer-form" [formGroup]="suggestionForm">
+    <div class="form-group">
+      <label for="titreSuggestion">Titre:</label>
+      <input class="form-control" formControlName="titreSuggestion" required>
+    </div>
+    <div class="form-group">
+      <label for="contenuSuggestion">Contenu:</label>
+      <textarea class="form-control" formControlName="contenuSuggestion" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="tagSuggestion">Tag:</label>
+      <input class="form-control" formControlName="tagSuggestion" required>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
+  <button class="btn btn-success" (click)="submit()" [disabled]="suggestionForm.invalid">Valider</button>
+</mat-dialog-actions>

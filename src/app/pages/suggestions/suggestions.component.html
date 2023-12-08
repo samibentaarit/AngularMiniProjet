@@ -1,0 +1,56 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Rechercher par le tag du suggestion" [(ngModel)]="searchTerm" (input)="search()">
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+
+                <div class="col-8">
+                  <h3 class="mb-0">Suggestions</h3>
+                </div>
+                <div class="col-4 text-right">
+                  <button type="button" class="btn btn-info" (click)="openDialog()">
+                    <i class="fas fa-plus" style="margin-right: 10px;"></i>Ajouter une suggestion
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="list-group list-group-flush">
+              <ng-container *ngIf="suggestions && suggestions.length > 0; else noSuggestions">
+                <a *ngFor="let suggestion of filtredSuggestions" class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="d-flex">
+                      <h5 class="mb-1">{{ suggestion.titreSuggestion }}</h5>
+                    </div>
+                    <p class="mb-0">{{ suggestion.contenuSuggestion }}</p>
+                    <p class="mb-0">{{ suggestion.tagSuggestion }}</p>
+                  </div>
+
+                  <div>
+                    <button type="button" class="btn btn-sm btn-outline-danger mr-2" (click)="likeSuggestion(suggestion)">
+                      <i class="fas fa-heart"></i> {{ suggestion.likes }}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" (click)="openEditDialog(suggestion)">
+                      <i class="fas fa-pencil-alt"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger" (click)="deleteSuggestion(suggestion.idSuggestion)">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </a>
+              </ng-container>
+              <ng-template #noSuggestions>
+                <p class="text-center">Aucune suggestion disponible.</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

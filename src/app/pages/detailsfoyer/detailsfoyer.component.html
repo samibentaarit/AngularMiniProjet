@@ -1,0 +1,25 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Table -->
+      <div class="row">
+        <div class="col">
+          <!-- Suppression du cadre blanc -->
+          <div class="card shadow-none border-0">
+            <!-- Retire le titre de la table ici -->
+            <div class="card-body p-0">
+              <ng-container *ngIf="idFoyer">
+                <div class="row">
+                  <div class="col">
+                    <!-- Utilisation de la classe table-lg pour agrandir la table -->
+                    <app-bloc [idFoyer]="idFoyer" class="table-lg"></app-bloc>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

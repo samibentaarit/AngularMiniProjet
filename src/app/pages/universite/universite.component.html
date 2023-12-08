@@ -1,0 +1,60 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        
+        <!-- Table -->
+        <div class="row">
+          <div class="col">
+            <div class="card shadow">
+              <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h3 class="mb-0">Universities</h3>
+                  </div>
+                  <div class="col-4 text-right">
+                    <button type="button" class="btn btn-info" (click)="openDialog()">
+                      <i class="fas fa-plus" style="margin-right: 10px;"></i>Ajouter une Universite
+                  </button>
+                    <a class="btn btn-sm btn-primary" (click)="openDialog()">Ajouter une Universite</a>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">University Name</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Nom Foyer</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let universite of universites">
+                      <th scope="row">{{ universite.idUniversite }}</th>
+                      <td>{{ universite.nomUniversite }}</td>
+                      <td>{{ universite.adresse }}</td>
+                      <td>{{ universite.foyer?.nomFoyer }}</td>
+                      <td class="text-right">
+                        <div ngbDropdown placement="bottom-right">
+                          <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                            <i class="fas fa-ellipsis-v"></i>
+                          </a>
+                          <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                            <a class="dropdown-item" (click)="openEditDialog(universite.idUniversite, universite.nomUniversite, universite.adresse, universite.foyer)">Edit</a>
+                            <a class="dropdown-item" (click)="deleteUniversite(universite.idUniversite)">Delete</a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

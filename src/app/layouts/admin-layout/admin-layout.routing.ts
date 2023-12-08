@@ -5,11 +5,22 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
+import { UniversiteComponent } from 'src/app/pages/universite/universite.component';
+import {BlocComponent, BlocDialog} from "../../pages/bloc/bloc.component";
+import {FoyerComponent} from "../../pages/foyer/foyer.component";
+import {DetailsfoyerComponent} from "../../pages/detailsfoyer/detailsfoyer.component";
+import {SuggestionsComponent} from "../../pages/suggestions/suggestions.component";
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent }
+    { path: 'maps',           component: MapsComponent },
+    { path: 'uni',           component: UniversiteComponent },
+    {path: 'foyer',          component:FoyerComponent},
+  { path: 'bloc/:idFoyer', component: BlocComponent },
+  { path: 'foyer/consulterblocs/:idFoyer', component: DetailsfoyerComponent },
+    {path: 'foyer/suggestion/:idFoyer',          component:SuggestionsComponent}
+
 ];

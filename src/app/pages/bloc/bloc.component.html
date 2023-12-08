@@ -1,0 +1,54 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Table -->
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Les Blocs asscociés à ce foyer</h3>
+                </div>
+                <div class="col-4 text-right">
+                  <button type="button" class="btn btn-info" (click)="openDialog()">
+                    <i class="fas fa-plus" style="margin-right: 10px;"></i>Ajouter un bloc
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nom du bloc</th>
+                  <th scope="col">Capacité du bloc</th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let bloc of blocs">
+                  <th scope="row">{{ bloc.idBloc }}</th>
+                  <td>{{ bloc.nomBloc }}</td>
+                  <td>{{ bloc.capaciteBloc }}</td>
+                  <td class="text-right">
+                    <div>
+                      <button type="button" class="btn btn-sm btn-primary" (click)="openEditDialog(bloc.idBloc, bloc.nomBloc, bloc.capaciteBloc)">
+                        <i class="fas fa-pencil-alt"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-danger" (click)="deleteBloc(bloc.idBloc)">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

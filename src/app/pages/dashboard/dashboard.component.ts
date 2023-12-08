@@ -7,7 +7,7 @@ import {
   parseOptions,
   chartExample1,
   chartExample2
-} from "../../variables/charts";
+} from '../../variables/charts';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit {
   public datasets: any;
   public data: any;
   public salesChart;
-  public clicked: boolean = true;
-  public clicked1: boolean = false;
+  public clicked = true;
+  public clicked1 = false;
 
   ngOnInit() {
 

@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Modifier l'université</h2>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="universiteForm">
+        <div class="form-group">
+            <label for="nomUniversite">Nom de l'université</label>
+            <input class="form-control" formControlName="nomUniversite" required>
+        </div>
+        <div class="form-group">
+            <label for="adresse">Adresse</label>
+            <input class="form-control" formControlName="adresse" required>
+        </div>
+        <div class="form-group">
+            <label for="foyer">Foyer</label>
+            <mat-select class="form-control" formControlName="foyer" >
+                <mat-option *ngFor="let foyer of foyers" [value]="foyer">{{ foyer.nomFoyer }}</mat-option>
+              </mat-select>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
+    <button class="btn btn-success" (click)="submitEdit()" [disabled]="universiteForm.invalid">Enregistrer</button>
+</mat-dialog-actions>

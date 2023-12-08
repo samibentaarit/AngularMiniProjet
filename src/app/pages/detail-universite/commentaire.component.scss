@@ -1,0 +1,104 @@
+.comment-list {
+  list-style: none;
+  padding: 0;
+
+  .comment-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+
+    &:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .comment-content {
+      flex: 1;
+    }
+
+    .comment-actions {
+      text-align: right;
+
+      .delete-button {
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #c0392b;
+        }
+      }
+    }
+  }
+}
+.comment-container {
+  margin-top: 20px;
+
+  .comment-input {
+    display: flex;
+    margin-bottom: 10px;
+
+    textarea {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 8px;
+
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  }}
+/* app-commentaire.component.scss */
+.comment-item {
+  display: flex;
+  align-items: center;
+
+  .qr-code {
+    margin-left: 10px;
+
+    canvas {
+      width: 50px;  // Ajustez la largeur selon vos besoins
+      height: 50px; // Ajustez la hauteur selon vos besoins
+    }
+  }
+
+  // ... le reste du code CSS existant ...
+}
+/* app-commentaire.component.scss */
+.qr-code-large {
+  width: 80px; /* Ajustez la largeur selon vos besoins */
+  height: 80px; /* Ajustez la hauteur selon vos besoins */
+}
+
+.comment-item {
+  /* Autres styles... */
+
+  .qr-code {
+    margin-left: 10px;
+  }
+
+  .comment-actions {
+    margin-left: 20px; /* Ajustez la marge entre le code QR et le bouton Supprimer */
+  }
+}
+

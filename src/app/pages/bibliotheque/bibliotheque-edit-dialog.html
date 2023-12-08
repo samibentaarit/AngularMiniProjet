@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Modifier le bibliotheque</h2>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="bibliothequeForm">
+        <div class="form-group">
+            <label for="titreBibliotheque">Titre de la bibliotheque</label>
+            <input class="form-control" formControlName="titreBibliotheque" required>
+        </div>
+        <div class="form-group">
+            <label for="descriptionBibliotheque">Description de la bibliotheque</label>
+            <input class="form-control" formControlName="descriptionBibliotheque" required>
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
+    <button class="btn btn-success" (click)="submitEdit()" [disabled]="bibliothequeForm.invalid">Enregistrer</button>
+</mat-dialog-actions>
+

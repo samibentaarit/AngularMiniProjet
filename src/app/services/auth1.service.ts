@@ -16,6 +16,9 @@ export class Auth1Service {
   register(firstName: string, lastName: string, email: string, password: string, role?: string): Observable<any> {
     const body = { firstName, lastName, email, password, ...(role && { role }) };
 
+    return this.http.post<any>(`${this.apiUrl}/register`, body)
+      .pipe(
+        tap(response => this.handleAuthentication(response)),
     return this.http.post<any>(`${this.apiUrl}/register`, body, { responseType: 'text' as 'json' })
       .pipe(
         tap(response => this.handleAuthentication11(response)),
@@ -26,14 +29,16 @@ export class Auth1Service {
    handleAuthentication(response: any): void {
     // Assuming your backend sends an authentication token in the response
     const authToken = response.error.text;
-   
+
+
     if (authToken) {
       const authToken =""
 
       const decodedToken: any = jwtDecode(authToken);
       // Store the authentication token in local storage
       localStorage.setItem('authToken', authToken);
-  
+
+
       // You can also store other user details if needed
        localStorage.setItem('userInfo', JSON.stringify(decodedToken));
 
@@ -72,6 +77,8 @@ private handleAuthentication11(token: string): void {
 logout(): void {
   // Remove the authentication token from session storage
   sessionStorage.removeItem('authToken');
+}
+
 }
 
 }

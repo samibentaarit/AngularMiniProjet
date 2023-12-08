@@ -1,0 +1,29 @@
+<!-- chambre-edit-dialog.component.html -->
+<div class="bg-gradient-pink">
+<h2 mat-dialog-title>Modifier la chambre</h2>
+</div>
+<mat-dialog-content class="mat-typography bg-gradient-pink ">
+    <form [formGroup]="chambreForm">
+        <div class="form-group">
+            <label for="numeroChambre">Numéro de chambre</label>
+            <input class="form-control" formControlName="numeroChambre" required>
+        </div>
+      <div class="form-group">
+        <label for="typeC">Type de chambre</label>
+        <select class="form-control" formControlName="typeC" required>
+          <option value="SIMPLE">Simple</option>
+          <option value="DOUBLE">Double</option>
+          <option value="TRIPLE">Triple</option>
+        </select>
+      </div>
+<!--        <div class="form-group">-->
+<!--            <label for="bloc">Bloc</label>-->
+<!--            <input class="form-control" formControlName="bloc" required>-->
+<!--        </div>-->
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="bg-gradient-pink" align="end">
+    <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
+    <button class="btn btn-success" (click)="submitEdit()" [disabled]="chambreForm.invalid">Enregistrer</button>
+</mat-dialog-actions>

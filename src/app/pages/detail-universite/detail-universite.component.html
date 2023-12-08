@@ -1,0 +1,100 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <style>
+        .card.bg-gradient-pink.shadow.mb-4 {
+          background: linear-gradient(to right, #ff66b2, #ff0066); /* Exemple de dégradé de rose foncé */
+          /* Ajoutez d'autres propriétés CSS au besoin */
+        }
+      </style>
+      <!-- University Details -->
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card bg-gradient-pink shadow ">
+            <!-- Image de fond de la carte -->
+            <div class="card-header bg-transparent border-0">
+              <div class="row align-items-center">
+                <!-- Decorated header row -->
+                <div class="col">
+                  <h3 class="mb-0 text-white">University Details</h3>
+                </div>
+                <!-- Add other header components as needed -->
+              </div>
+            </div>
+            <!-- University Content -->
+            <div class="card-body text-white">
+              <div class="row">
+                <div class="col-md-4">
+                  <h4>ID:</h4>
+                  <p>{{ universite?.idUniversite }}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4>University Name:</h4>
+                  <p>{{ universite?.nomUniversite }}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4>Nom Foyer:</h4>
+                  <p>{{ universite?.foyer?.nomFoyer }}</p>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <h4>Address:</h4>
+                  <p>{{ universite?.adresse }}</p>
+                </div>
+                <button mat-raised-button color="primary" style="background-color: #4CAF50;" (click)="loadClubs()">load Clubs</button>
+
+              </div>
+
+              <!-- Add other details as needed -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Club Assignment Form -->
+        <div class="form-group">
+          <label for="clubSelect">Sélectionnez un club:</label>
+          <select id="clubSelect" class="form-control" [(ngModel)]="selectedClubId">
+            <ng-template ngFor let-club [ngForOf]="clubsAssign">
+              <!-- Utilisez *ngIf pour conditionner l'affichage du club dans la liste déroulante -->
+              <option *ngIf="!isClubAssignedToUniversity(club.idClub)" [value]="club.idClub">{{ club.nomClub }}</option>
+            </ng-template>
+          </select>
+
+          <button type="button" class="btn btn-primary" (click)="assignClubToUniversity(universite.idUniversite, selectedClubId)">Assigner Club</button>
+        </div>
+      </div>
+      <!-- ... Autre contenu HTML ... -->
+      <!-- Bouton pour charger les clubs associés à l'université -->
+      <!-- Liste des clubs associés à l'université -->
+      <div *ngIf="showClubsList && clubs && clubs.length > 0" style="margin-top: 30px;">
+
+        <div class="row">
+          <div class="col-lg-4" *ngFor="let club of clubs">
+            <div class="card bg-gradient-pink shadow mb-4" style="width: 18rem;">
+              <!-- Card Body -->
+              <div class="card-body text-white">
+                <h2 class="card-title">Club Details</h2>
+                <p class="card-text">ID: {{ club.idClub }}</p>
+                <p class="card-text">Club Name: {{ club.nomClub }}</p>
+                <p class="card-text">Creation Date: {{ club.dateCreation | date }}</p>
+                <p class="card-text">Social Link: {{ club.lienSocial }}</p>
+                <button type="button" class="btn btn-danger" (click)="removeClubFromUniversity(universite.idUniversite, club.idClub)">Dissocier Club</button>
+                <!-- Add other details and styles as per your preference -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+
+        <div>
+          <h2>Détail de l'université {{ idUniversite }}</h2>
+          <app-commentaire [commentaires]="commentaires" (miseAJourCommentaires)="rafraichirCommentaires()"></app-commentaire>
+
+        </div>
+
+    </div>
+    </div>
+  </div>
+

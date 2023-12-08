@@ -1,0 +1,38 @@
+
+<h2 mat-dialog-title>Ajouter un étudiant</h2>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="etudiantForm">
+        <div class="form-group">
+            <label for="nomEt">Nom de l'étudiant</label>
+            <input class="form-control" [(ngModel)]="data.nomEt" name="nomEt" id="nomEt" required>
+        </div>
+        <div class="form-group">
+            <label for="prenomEt">Prénom de l'étudiant</label>
+            <input class="form-control" [(ngModel)]="data.prenomEt" name="prenomEt" id="prenomEt" required>
+        </div>
+        <div class="form-group">
+            <label for="cin">CIN de l'étudiant</label>
+            <input class="form-control" [(ngModel)]="data.cin" name="cin" id="cin" required>
+        </div>
+        <div class="form-group">
+            <label for="ecole">École de l'étudiant</label>
+            <input class="form-control" [(ngModel)]="data.ecole" name="ecole" id="ecole" required>
+        </div>
+        <div class="form-group">
+            <label for="dateNaissance">Date de naissance de l'étudiant</label>
+            <input class="form-control" [(ngModel)]="data.dateNaissance" name="dateNaissance" id="dateNaissance" required>
+        </div>
+       <!-- <div class="form-group">
+            <label for="foyer">Foyer</label>
+            <mat-select class="form-control" [(ngModel)]="data.foyer" name="foyer" id="foyer">
+              <mat-option *ngFor="let foyer of foyers" [value]="foyer">{{ foyer.nomFoyer }}</mat-option>
+            </mat-select>
+        </div>-->
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
+    <button class="btn btn-success" (click)="submit()" [disabled]="etudiantForm.invalid">Valider</button>
+</mat-dialog-actions>

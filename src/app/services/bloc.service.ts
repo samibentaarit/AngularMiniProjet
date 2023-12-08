@@ -1,4 +1,13 @@
 import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {Bloc} from "../models/bloc";
+import {Observable} from "rxjs";
+import {Chambre} from "../models/chambre";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Bloc } from '../models/bloc';
+
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Bloc} from "../models/bloc";
@@ -10,6 +19,12 @@ import { Router } from '@angular/router';
 })
 export class BlocService {
 
+  constructor(private http: HttpClient) {}
+
+  getAllBlocs() {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<Bloc[]>(environment.url + '/bloc', { headers });
+    return this.http.get<Bloc[]>(environment.url + '/blocs', { headers });
   constructor(private http: HttpClient) { }
   getAllBlocs() {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -27,6 +42,10 @@ export class BlocService {
     return this.http.get<Bloc>(environment.url + '/bloc/' + id, { headers });
   }
 
+  addBloc(bloc: Bloc) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<Bloc>(environment.url + '/bloc', bloc, { headers });
+  }
   addBloc(bloc:{ nomBloc: string; capaciteBloc: number;
   }) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -52,11 +71,14 @@ export class BlocService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.delete(environment.url + '/bloc/' + id, { headers });
   }
+  getAllChambresInBloc(blocId: number): Observable<Chambre[]> {
+    return this.http.get<Chambre[]>(`${environment.url}/bloc/${blocId}/chambres`);
 
   getBlocsByFoyerId(idFoyer: number): Observable<Bloc[]> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get<Bloc[]>(`${environment.url}/foyer/${idFoyer}/blocs`, { headers });
   }
+
 
 
 

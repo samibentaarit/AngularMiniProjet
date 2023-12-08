@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Modifier l'équipement</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="equipementForm">
+    <div class="form-group">
+      <label for="nom">Nom de l'équipement</label>
+      <input class="form-control" formControlName="nom" required>
+    </div>
+    <div class="form-group">
+      <label for="prixEquipemnt">Prix de l'équipement</label>
+      <input class="form-control" formControlName="prixEquipement" required>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
+  <button class="btn btn-success" (click)="submitEdit()" [disabled]="equipementForm.invalid">Enregistrer</button>
+</mat-dialog-actions>

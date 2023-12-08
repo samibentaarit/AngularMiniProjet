@@ -12,6 +12,7 @@
     </div>
   </div>
 </div>
+
 <div class="container-fluid mt--7">
   <div class="row">
     <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
@@ -78,43 +79,41 @@
               <h3 class="mb-0">My account</h3>
             </div>
             <div class="col-4 text-right">
-              <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+              <a  class="btn btn-sm btn-primary" (click)="toggleInputs()">Settings</a>
             </div>
           </div>
         </div>
         <div class="card-body">
-          <form>
+          <form [formGroup]="infoForm">
             <h6 class="heading-small text-muted mb-4">User information</h6>
-            <div class="pl-lg-4">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Username</label>
-                    <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-email">Email address</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
-                  </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-email">Email address</label>
+                  <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com" name="email"  [(ngModel)]="email" [disabled]="inputsDisabled">
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-first-name">First name</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Lucky">
-                  </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-first-name">First name</label>
+                  <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" name="firstName"  [(ngModel)]="firstName" [disabled]="inputsDisabled">
                 </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-last-name">Last name</label>
-                    <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Jesse">
-                  </div>
+
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-last-name">Last name</label>
+                  <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" name="lastName" [(ngModel)]="lastName" [disabled]="inputsDisabled">
+                </div>
+                                <!-- Display validation error if lastName is invalid -->
+                <div *ngIf="form.lastName.invalid && (form.lastName.dirty || form.lastName.touched)" class="text-danger">
+                  <div *ngIf="form.lastName.errors.invalidLastName">Invalid last name.</div>
                 </div>
               </div>
             </div>
+            
+       
+            
             <hr class="my-4" />
             <!-- Address -->
             <h6 class="heading-small text-muted mb-4">Contact information</h6>

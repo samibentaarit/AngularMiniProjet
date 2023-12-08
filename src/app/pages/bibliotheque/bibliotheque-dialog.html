@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Ajouter une bibliotheque</h2>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="bibliothequeForm">
+        <div class="form-group">
+            <label for="titreBibliotheque">Titre de la bibliotheque</label>
+            <input class="form-control" formControlName="titreBibliotheque" id="titreBibliotheque" required>
+        </div>
+        <div class="form-group">
+            <label for="descriptionBibliotheque">Description de la bibliotheque</label>
+            <input class="form-control" formControlName="descriptionBibliotheque" id="descriptionBibliotheque" required>
+        </div>
+        <!-- Add more fields for other properties of the Bibliotheque entity -->
+
+
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
+    <button class="btn btn-success" (click)="submit()" [disabled]="bibliothequeForm.invalid">Valider</button>
+</mat-dialog-actions>

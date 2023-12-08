@@ -26,8 +26,6 @@
                   <th scope="col">ID</th>
                   <th scope="col">Bloc Name</th>
                   <th scope="col">Capacite Bloc</th>
-                  <th scope="col">Num chambre</th>
-                  <th scope="col">commodite</th>
                   <th scope="col"></th>
                 </tr>
                 </thead>
@@ -35,13 +33,29 @@
                 <tr *ngFor="let bloc of blocs">
                   <th scope="row">{{ bloc.idBloc }}</th>
                   <td>{{ bloc.nomBloc }}</td>
-                  <td>{{ bloc.adresse }}</td>
-                  <td>{{ bloc.foyer?.nomFoyer }}</td>
+                  <td>{{ bloc.capaciteBloc }}</td>
                   <td class="text-right">
                     <div ngbDropdown placement="bottom-right">
                       <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
+                        <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                         <a class="dropdown-item" (click)="openEditDialog(bloc.idBloc, bloc.nomBloc, bloc.capaciteBloc)">Edit</a>
+                         <a class="dropdown-item" (click)="deleteBloc(bloc.idBloc)">Delete</a>
+                          <a class="dropdown-item" (click)="detailsBloc(bloc.idBloc)" [routerLink]="['/bibliotheque', bloc.idBloc]">Details</a>
+                        </div>
+                     </div>
+                   </td>
+                 </tr>
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
                       <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
                         <a class="dropdown-item" (click)="openEditDialog(bloc.idBloc, bloc.nomBloc, bloc.adresse, bloc.foyer)">Edit</a>
                         <a class="dropdown-item" (click)="deleteUniversite(bloc.idUniversite)">Delete</a>
@@ -59,3 +73,7 @@
   </div>
 </div>
 <p>bloc works!</p>
+
+
+
+

@@ -1,5 +1,11 @@
 import { Equipement } from './equipement';
+import {Bloc} from "./bloc";
 
+export class Chambre{
+   idChambre: number ;
+   numeroChambre: number;
+   bloc:Bloc
+   occupee: any;
 export class Chambre {
   idChambre?: number;
   numeroChambre: number;

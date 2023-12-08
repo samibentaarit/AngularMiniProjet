@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Modifier le bloc</h2>
-<!--
+
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="blocForm">
     <div class="form-group">
@@ -7,15 +7,10 @@
       <input class="form-control" formControlName="nomBloc" required>
     </div>
     <div class="form-group">
-      <label for="adresse">Adresse</label>
-      <input class="form-control" formControlName="adresse" required>
+      <label for="capaciteBloc">Capacite du bloc</label>
+      <input class="form-control" formControlName="capaciteBloc" required>
     </div>
-    <div class="form-group">
-      <label for="chambre">Chambre</label>
-      <mat-select class="form-control" formControlName="chambre" >
-        <mat-option *ngFor="let chambre of chambres" [value]="chambre">{{ chambre.numChambre }}</mat-option>
-      </mat-select>
-    </div>
+
   </form>
 </mat-dialog-content>
 
@@ -23,4 +18,4 @@
   <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
   <button class="btn btn-success" (click)="submitEdit()" [disabled]="blocForm.invalid">Enregistrer</button>
 </mat-dialog-actions>
--->
+

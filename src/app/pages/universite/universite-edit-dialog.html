@@ -10,12 +10,6 @@
             <label for="adresse">Adresse</label>
             <input class="form-control" formControlName="adresse" required>
         </div>
-        <div class="form-group">
-            <label for="foyer">Foyer</label>
-            <mat-select class="form-control" formControlName="foyer" >
-                <mat-option *ngFor="let foyer of foyers" [value]="foyer">{{ foyer.nomFoyer }}</mat-option>
-              </mat-select>
-        </div>
     </form>
 </mat-dialog-content>
 

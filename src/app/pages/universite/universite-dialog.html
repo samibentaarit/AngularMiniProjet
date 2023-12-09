@@ -12,17 +12,9 @@
         </div>
         <!-- Add more fields for other properties of the Universite entity -->
     </form>
-    <form [formGroup]="universiteForm">
-        <div class="form-group">
-            <label for="foyer">Foyer</label>
-            <mat-select class="form-control" [(ngModel)]="data.foyer" name="foyer" id="foyer" >
-                <mat-option *ngFor="let foyers of foyers" [value]="foyers">{{ foyers.nomFoyer }}</mat-option>
-            </mat-select>
-        </div>
-    </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
     <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
-    <button class="btn btn-success" (click)="submit()" [disabled]="universiteForm.invalid || !data.foyer.nomFoyer">Valider</button>
+    <button class="btn btn-success" (click)="submit()" [disabled]="universiteForm.invalid ">Valider</button>
 </mat-dialog-actions>

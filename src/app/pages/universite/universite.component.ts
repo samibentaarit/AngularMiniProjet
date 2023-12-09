@@ -29,6 +29,7 @@ export class UniversiteComponent implements OnInit {
   searchTerm: string = '';
   filteredUniversites: Universite[];
 clubs : Club [] ;
+foyer : Foyer ;
 
   constructor(
     private universiteService: UniversiteService
@@ -50,14 +51,13 @@ clubs : Club [] ;
 
     const pdf = new jsPDF();
     const pageTitle = 'Liste des Universités';
-    const header = [['ID', 'Nom de l\'Université', 'Adresse', 'Nom du Foyer']];
+    const header = [['ID', 'Nom de l\'Université', 'Adresse']];
 
     // Ajouter des données (par exemple, utiliser filteredUniversites)
     const data = this.filteredUniversites.map(universite => [
       universite.idUniversite.toString(),
       universite.nomUniversite,
       universite.adresse,
-      universite.foyer?.nomFoyer || '', // Si foyer est null, affiche une chaîne vide
     ]);
 
     pdf.autoTable({
@@ -129,7 +129,6 @@ clubs : Club [] ;
       data: {
         nomUniversite: '',
         adresse: '',
-        foyer: null, // You can pass an foyer object here if needed
       }
     });
 
@@ -138,38 +137,11 @@ clubs : Club [] ;
       this.refresh();
     });
   }
-  /*
-  aopenEditDialog(
-    idUniversite: number,
-    nomUniversite: string,
-    adresse: string,
-    foyer: Foyer
-): void {
-  const dialogRef = this.dialog.open(UniversiteEditDialog, {
-    width: '500px',
-    data: {
-      idUniversite: idUniversite,
-      nomUniversite: nomUniversite,
-      adresse: adresse,
-      foyer: foyer // You can pass an foyer object here if needed
-    }
-  });
-  dialogRef.afterClosed().subscribe((result: Universite) => {
-    if (result) {
-      this.universiteService.updateUniversite(result.idUniversite, result).subscribe((res: any) => {
-        dialogRef.close();
-        this.refresh();
-      });
-    }
-  });
-}
-*/
 
 openEditDialog(
   idUniversite: number,
   nomUniversite: string,
   adresse: string,
-  foyer: Foyer
 ): void {
   const dialogRef = this.dialog.open(UniversiteEditDialog, {
     width: '500px',
@@ -177,7 +149,6 @@ openEditDialog(
       idUniversite: idUniversite,
       nomUniversite: nomUniversite,
       adresse: adresse,
-      foyer: foyer,
     },
   });
   dialogRef.afterClosed().subscribe((result: Universite) => {
@@ -229,42 +200,28 @@ deleteUniversite(idUniversite: number): void {
 /////////////////////////////////////////////////////
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'universite-dialog',
   templateUrl: 'universite-dialog.html',
 })
-// tslint:disable-next-line:component-class-suffix
+
 export class UniversiteDialog implements OnInit {
-  // Add the necessary properties for universite creation dialog
 
   universiteForm: FormGroup;
-  foyers:Foyer[] = [];
+
 
   constructor(
       public dialogRef: MatDialogRef<UniversiteDialog>,
       @Inject(MAT_DIALOG_DATA) public data: Universite,
       private formBuilder: FormBuilder,
       private universiteService: UniversiteService,
-      private foyerService: FoyerService,
 
   ) {}
 
   ngOnInit(): void {
-    this.foyerService.getAllFoyers().subscribe(
-      (foyers) => {
-        this.foyers = foyers;
-      },
-      (error) => {
-        console.error(error);
-        // Handle error here
-      }
-    );
-
     // Create the form group with custom validation for required fields
     this.universiteForm = this.formBuilder.group({
       nomUniversite: [this.data.nomUniversite, Validators.required],
       adresse: [this.data.adresse, Validators.required],
-      foyer: [this.data.foyer, Validators.required], // Add the foyer field with appropriate validation
     });
   }
 
@@ -274,10 +231,9 @@ export class UniversiteDialog implements OnInit {
       return;
     }
     // Customize the submission logic for adding  universite
-    const universite: {foyer:Foyer;  nomUniversite: string; adresse: string; } = {
+    const universite: {nomUniversite: string; adresse: string; } = {
       nomUniversite: this.data.nomUniversite,
       adresse: this.data.adresse,
-      foyer:this.data.foyer
     };
 
     this.universiteService.addUniversite(universite).subscribe((res: any) => {
@@ -286,15 +242,10 @@ export class UniversiteDialog implements OnInit {
   }
 
   onCancel(): void {
-    // Close the dialog without any action
     this.dialogRef.close();
   }
 
 }
-
-
-
-
 
 @Component({
   selector: 'universite-edit-dialog',
@@ -302,8 +253,7 @@ export class UniversiteDialog implements OnInit {
 })
 export class UniversiteEditDialog implements OnInit {
   universiteForm: FormGroup;
-  foyers: Foyer[] = [];
-  selectedFoyer: Foyer;
+
 
   constructor(
     public dialogRef: MatDialogRef<UniversiteEditDialog>,
@@ -316,38 +266,20 @@ export class UniversiteEditDialog implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.foyerService.getAllFoyers().subscribe(
-      (foyers) => {
-        this.foyers = foyers;
-
-        // Set the initial value for the "foyer" form control and selectedFoyer
-        const initialFoyer = this.foyers.find(f => f.idFoyer === this.data.foyer.idFoyer);
-        this.universiteForm.get('foyer')?.setValue(initialFoyer);
-        this.selectedFoyer = initialFoyer;
-      },
-      (error) => {
-        console.error(error);
-        // Handle error here
-      }
-    );
-
     this.universiteForm = this.formBuilder.group({
       idUniversite: [this.data.idUniversite, Validators.required],
       nomUniversite: [this.data.nomUniversite, Validators.required],
       adresse: [this.data.adresse, Validators.required],
-      foyer: [null, Validators.required],
     });
   }
 
-  submit() {
+  submitEdit() {
     if (this.universiteForm.invalid) {
       return;
     }
-    // Customize the submission logic for adding  universite
-    const universite: {foyer:Foyer;  nomUniversite: string; adresse: string; } = {
+    const universite: {nomUniversite: string; adresse: string; } = {
       nomUniversite: this.data.nomUniversite,
       adresse: this.data.adresse,
-      foyer:this.data.foyer
     };
 
     this.universiteService.addUniversite(universite).subscribe((res: any) => {

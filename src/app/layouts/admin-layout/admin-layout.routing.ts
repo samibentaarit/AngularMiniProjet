@@ -40,8 +40,6 @@ export const AdminLayoutRoutes: Routes = [
     {path: 'bloc',          component:BlocComponent},
   { path: 'bibliotheque/:idBloc', component: BibliothequeComponent },
     { path: 'bloc-details/:idBloc', component: BlocDetailsComponent },
-    {path: 'biblio',          component:BibliothequeComponent},
-
     { path: 'chambre',           component: ChambreComponent },
     { path: 'equipement',           component: EquipementComponent },
     {path: 'chambre-details/:id', component: ChambreDetailsComponent },

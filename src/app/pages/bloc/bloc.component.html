@@ -40,6 +40,13 @@
                       <button type="button" class="btn btn-sm btn-danger" (click)="deleteBloc(bloc.idBloc)">
                         <i class="fas fa-trash"></i>
                       </button>
+                      <button type="button" class="btn btn-sm btn-secondary" [routerLink]="['/chambre']">
+                        <i class="fas fa-eye"></i> Consulter les chambres
+                      </button>
+                      <button type="button" class="btn btn-sm btn-secondary" [routerLink]="['/bloc-details', bloc.idBloc]">
+                        <i class="fas fa-book"></i> Consulter les bibliothèques
+                      </button>
+
                     </div>
                   </td>
                 </tr>

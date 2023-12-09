@@ -12,8 +12,7 @@ import {ChambreComponent} from './pages/chambre/chambre.component';
 import {EquipementComponent} from './pages/equipement/equipement.component';
 import {ChambreDetailsComponent} from './pages/chambre-details/chambre-details.component';
 import {ChambreGroupComponent} from './pages/chambre-group/chambre-group.component';
-import { Register1Component } from './pages/Auth/oldregister/register1.component';
-import { Login1Component } from './pages/Auth/oldlogin/login1.component';
+
 
 const routes: Routes = [
   {

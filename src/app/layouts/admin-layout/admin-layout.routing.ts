@@ -5,11 +5,11 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
-import { UniversiteComponent } from 'src/app/pages/universite/universite.component';
+
 import {EtudiantComponent} from "../../pages/etudiant/etudiant.component";
 import {ClubComponent} from "../../pages/club/club.component";
 import {DetailUniversiteComponent} from "../../pages/detail-universite/detail-universite.component";
-import {BlocComponent} from "../../pages/bloc/bloc.component";
+
 import { AuthentificationGuard } from 'src/app/pages/Auth/authentification.guard';
 import { RoleGuardGuard } from 'src/app/pages/Auth/role-guard.guard';
 import { ForgetPasswordComponent } from 'src/app/pages/Auth/forget-password/forget-password.component';
@@ -24,6 +24,7 @@ import {BlocComponent, BlocDialog} from "../../pages/bloc/bloc.component";
 import {FoyerComponent} from "../../pages/foyer/foyer.component";
 import {DetailsfoyerComponent} from "../../pages/detailsfoyer/detailsfoyer.component";
 import {SuggestionsComponent} from "../../pages/suggestions/suggestions.component";
+import {RestaurantComponent} from "../../pages/restaurant/restaurant.component";
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -39,17 +40,17 @@ export const AdminLayoutRoutes: Routes = [
     {path: 'bloc',          component:BlocComponent},
   { path: 'bibliotheque/:idBloc', component: BibliothequeComponent },
     { path: 'bloc-details/:idBloc', component: BlocDetailsComponent },
-    {path: 'biblio',          component:BibliothequeComponent}
+    {path: 'biblio',          component:BibliothequeComponent},
 
     { path: 'chambre',           component: ChambreComponent },
     { path: 'equipement',           component: EquipementComponent },
-    {path: 'chambre-details/:id', component: ChambreDetailsComponent }
+    {path: 'chambre-details/:id', component: ChambreDetailsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'uni',           component: UniversiteComponent },
     {path: 'foyer',          component:FoyerComponent},
   { path: 'bloc/:idFoyer', component: BlocComponent },
   { path: 'foyer/consulterblocs/:idFoyer', component: DetailsfoyerComponent },
-    {path: 'foyer/suggestion/:idFoyer',          component:SuggestionsComponent}
-
+    {path: 'foyer/suggestion/:idFoyer',          component:SuggestionsComponent},
+  { path: 'restau',           component: RestaurantComponent },
 ];
 

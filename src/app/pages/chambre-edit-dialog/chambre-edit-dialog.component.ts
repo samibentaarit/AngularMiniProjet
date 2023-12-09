@@ -1,4 +1,3 @@
-// chambre-edit-dialog.component.ts
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -44,8 +43,6 @@ export class ChambreEditDialog implements OnInit {
       prix: 0,
       maxEquipements: 0,
     };
-
-    // Use ChambreService to update the chambre
     this.chambreService.updateChambre(updatedChambre.idChambre, updatedChambre).subscribe(
       (response: Chambre) => {
         console.log('Chambre updated successfully:', response);

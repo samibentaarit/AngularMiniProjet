@@ -1,14 +1,8 @@
-import {Chambre} from "./chambre";
 import {Foyer} from "./foyer";
-
-export class Bloc {
-  idBloc: number;
-  nomBloc: string;
-  capaciteBloc: number;
-}
-  chambre: Chambre | null; }
 export interface Bloc {
+  idBloc : number;
   nomBloc: String;
+  capaciteBloc : number;
   foyer: Foyer ;
   idFoyer: number;
 }

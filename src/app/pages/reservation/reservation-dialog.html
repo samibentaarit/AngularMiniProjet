@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Ajouter une reservation</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="reservationForm">
+    <div class="form-group">
+      <label for="anneeUniversitaire">Annee Universitaire</label>
+      <input class="form-control" [(ngModel)]="data.anneeUniversitaire" name="anneeUniversitaire" id="anneeUniversitaire" required>
+    </div>
+  </form>
+  <!--     <form [formGroup]="reservationForm">
+          <div class="form-group">
+              <label for="chambre">Chambre</label>
+              <mat-select class="form-control" [(ngModel)]="data.chambre" name="chambre" id="chambre" >
+                  <mat-option *ngFor="let chambres of chambres" [value]="chambres">{{ chambres.numeroChambre }}</mat-option>
+              </mat-select>
+          </div>
+      </form> -->
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
+  <button class="btn btn-success" (click)="submit()" [disabled]="reservationForm.invalid || !data.chambre.numeroChambre">Valider</button>
+</mat-dialog-actions>

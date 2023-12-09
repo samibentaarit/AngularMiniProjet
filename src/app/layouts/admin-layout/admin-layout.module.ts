@@ -14,20 +14,22 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { ToastrModule } from 'ngx-toastr';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+;
 // import {ChambreComponent} from '../../pages/chambre/chambre.component';
 // import {EquipementComponent} from '../../pages/equipement/equipement.component';
-import { ConfirmDialogComponent } from 'src/app/variables/popup/popup.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { UniversiteComponent, UniversiteDialog, UniversiteEditDialog } from 'src/app/pages/universite/universite.component';
 import { ConfirmDialogComponent } from 'src/app/variables/popup/popup.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {RestaurantComponent, RestaurantDialog, RestaurantEditDialog} from "../../pages/restaurant/restaurant.component";
+import {
+  ReservationComponent,
+  ReservationDialog,
+  ReservationEditDialog
+} from "../../pages/reservation/reservation.component";
 
 @NgModule({
   imports: [
@@ -58,11 +60,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     // EquipementComponent,
     ConfirmDialogComponent,
     MapsComponent,
-    UniversiteDialog,
-    UniversiteComponent,
-    UniversiteDialog,
-    UniversiteEditDialog,
     ConfirmDialogComponent,
+    RestaurantComponent,
+    RestaurantDialog,
+    RestaurantEditDialog,
+    ReservationComponent,
+    ReservationDialog,
+    ReservationEditDialog,
   ]
 })
 

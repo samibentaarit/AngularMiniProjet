@@ -50,8 +50,13 @@ import { DetailsfoyerComponent } from './pages/detailsfoyer/detailsfoyer.compone
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
-import {BlocComponent} from "./pages/bloc/bloc.component";
+import {BlocComponent, BlocDialog, BlocEditDialog} from "./pages/bloc/bloc.component";
 import {BlocDetailsComponent} from "./pages/bloc/bloc-details/bloc-details.component";
+import { RestaurantComponent } from './pages/restaurant/restaurant.component';
+import {ClubComponent, ClubDialog, ClubEditDialog} from "./pages/club/club.component";
+import {UniversiteComponent, UniversiteDialog, UniversiteEditDialog} from "./pages/universite/universite.component";
+import {Universite} from "./models/universite";
+import {CommentaireComponent, DetailUniversiteComponent} from "./pages/detail-universite/detail-universite.component";
 
 
 @NgModule({
@@ -102,7 +107,9 @@ import {BlocDetailsComponent} from "./pages/bloc/bloc-details/bloc-details.compo
     BlocComponent,
     BlocDialog,
     BlocEditDialog,
-
+ClubComponent,
+    ClubDialog,
+    ClubEditDialog,
     BlocDetailsComponent,
     Register1Component,
     Login1Component,
@@ -127,12 +134,19 @@ import {BlocDetailsComponent} from "./pages/bloc/bloc-details/bloc-details.compo
     BibliothequeComponent,
       BibliothequeDialog,
       BibliothequeEditDialog,
-      ReservationComponent,
+
     EquipementDialogComponent,
     EquipementEditDialogComponent,
     ChambreDetailsComponent,
     DiscountLabelDirective,
     ChambreGroupComponent,
+    UniversiteComponent,
+      UniversiteEditDialog,
+      UniversiteDialog,
+    CommentaireComponent,
+    ClubEditDialog,
+      DetailUniversiteComponent,
+
     ],
   providers:
     [ChambreService, EquipementService],

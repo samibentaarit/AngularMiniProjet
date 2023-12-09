@@ -12,37 +12,44 @@ export class ReservationService {
   constructor(private http: HttpClient) {}
 
   getAllReservations() {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Reservation[]>(environment.url + '/reservation/'+'getAllReservation', { headers });
   }
 
   getReservationById(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Reservation>(environment.url + '/reservation/' + id, { headers });
   }
 
   addReservation(reservation:{ anneeUniversitaire: Date; estValide: boolean}) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.post<Reservation>(environment.url + '/reservation'+'saveReservation', reservation, { headers });
   }
 
   updateReservation(id: number, reservation: Reservation) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.put<Reservation>(environment.url + '/reservation/' + id, reservation, { headers });
   }
 
   deleteReservation(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.delete(environment.url + '/reservation/'+'deleteReservation/' + id, { headers });
   }
 
   getAllReservationEtatActif() {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get(environment.url + '/reservation/activer', { headers });
   }
 
   archiverReservation(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.put(environment.url + '/reservation/' + id + '/archiver', { headers });
   }
 

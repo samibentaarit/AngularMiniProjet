@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class LoginComponent implements OnInit{
   loginForm: FormGroup;
 
-
+  
   email: string = ''; // Declare the email property
   password: string = ''; // Declare the password property
 
@@ -36,15 +36,11 @@ export class LoginComponent implements OnInit{
 
   }
   ngOnInit(): void {
-     // Use the ActivatedRoute to get the parameter from the route
-     this.route.queryParams.subscribe(params => {
-      console.log(params)
-      this.token = params['token']; // Assuming the parameter name is 'token'
-      console.log(this.token)
 
-    });
+    this.authService.logout();
+    
   }
-
+  
 
 
   get form() {
@@ -52,7 +48,7 @@ export class LoginComponent implements OnInit{
   }
 
 
-
+  
   onSubmit() {
     console.log('Form:', this.loginForm);
 
@@ -69,7 +65,7 @@ export class LoginComponent implements OnInit{
     this.authService.login11(this.email, this.password).subscribe(response => {
         // Handle successful login, e.g., store token, navigate to home page, etc.
         console.log('Login successful', response);
-        this.router.navigate(['/home']); // Adjust the route based on your application
+        this.router.navigate(['/dashboard']); // Adjust the route based on your application
       }, error => {
       // Handle login error
       console.error('Login failed', error);

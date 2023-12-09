@@ -18,7 +18,7 @@ a:string;
     private authService: Auth1Service,
     private http :HttpClient,
      private router : Router
-    ,private route: ActivatedRoute
+    ,private route: ActivatedRoute 
    ) {}
 
   ngOnInit(): void {

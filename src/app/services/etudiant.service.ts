@@ -13,27 +13,32 @@ export class EtudiantService {
   constructor(private http: HttpClient) {}
 
   getAllEtudiants() {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Etudiant[]>(environment.url + '/etudiant', { headers });
   }
 
   getEtudiantById(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<Etudiant>(environment.url + '/etudiants/' + id, { headers });
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
+        return this.http.get<Etudiant>(environment.url + '/etudiants/' + id, { headers });
   }
 
   addEtudiant(etudiant: Etudiant) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.post<Etudiant>(environment.url + '/saveEtudiant', etudiant, { headers });
   }
 
   updateEtudiant(id: number, etudiant: Etudiant) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.put<Etudiant>(environment.url + '/etudiants/' + id, etudiant, { headers });
   }
 
   deleteEtudiant(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.delete(environment.url + '/etudiants/' + id, { headers });
   }
 

@@ -19,12 +19,14 @@ export class RestaurantService {
 
 
   getAllRestaurants() {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Restaurant[]>(environment.url + '/restaurant/getallrestau', { headers });
   }
 
   getRestaurantById(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Restaurant[
 
 
@@ -32,28 +34,31 @@ export class RestaurantService {
   }
 
   addRestaurant(restaurant:{ nomRestaurant: string}) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    console.log(restaurant)
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);    console.log(restaurant)
     return this.http.post<Restaurant>(environment.url + '/restaurant/ajoutRes', restaurant, { headers });
   }
 
   updateRestaurant(id: number, restaurant: Restaurant) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.put<Restaurant>(environment.url + '/restaurant/' + id, restaurant, { headers });
   }
 
   deleteRestaurant(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.delete(environment.url + '/restaurant/' + id, { headers });
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);    return this.http.delete(environment.url + '/restaurant/' + id, { headers });
   }
 
   getAllRestaurantEtatActif() {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get(environment.url + '/Restaurants/activer', { headers });
   }
 
   archiverRestaurant(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.put(environment.url + '/restaurants/' + id + '/archiver', { headers });
   }
 

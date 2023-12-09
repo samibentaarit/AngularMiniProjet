@@ -13,21 +13,25 @@ export class ChambreService {
   constructor(private http: HttpClient) {}
 
   getAllChambres(): Observable<Chambre[]> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Chambre[]>(environment.url + '/chambre', { headers });
   }
 
   getChambreById(id: string): Observable<Chambre> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Chambre>(environment.url + '/chambre/' + id, { headers });
   }
 
   isNumeroChambreExists(numeroChambre: number): Observable<boolean> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<boolean>(`${environment.url}/chambre/exists/${numeroChambre}`, { headers });
   }
   addChambre(chambre: Chambre): Observable<Chambre> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.post<Chambre>(environment.url + '/chambre', chambre, { headers });
   }
 

@@ -42,7 +42,7 @@ foyer : Foyer ;
   ngOnInit() {
     this.getAllUniversites();
     this.getAllClubs();
-    this.generatePdf() ;
+   // this.generatePdf() ;
 
   }
   generatePdf() {
@@ -96,6 +96,8 @@ foyer : Foyer ;
 
   refresh() {
     this.getAllUniversites();
+    this.getAllClubs();
+
   }
 
 

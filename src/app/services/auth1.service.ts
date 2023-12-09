@@ -4,21 +4,22 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Auth1Service {
   private apiUrl = 'http://localhost:60082';
+  roleAs: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private router: Router,
+    ) {}
 
   register(firstName: string, lastName: string, email: string, password: string, role?: string): Observable<any> {
     const body = { firstName, lastName, email, password, ...(role && { role }) };
 
-    return this.http.post<any>(`${this.apiUrl}/register`, body)
-      .pipe(
-        tap(response => this.handleAuthentication(response)),
     return this.http.post<any>(`${this.apiUrl}/register`, body, { responseType: 'text' as 'json' })
       .pipe(
         tap(response => this.handleAuthentication11(response)),
@@ -29,16 +30,14 @@ export class Auth1Service {
    handleAuthentication(response: any): void {
     // Assuming your backend sends an authentication token in the response
     const authToken = response.error.text;
-
-
+   
     if (authToken) {
       const authToken =""
 
       const decodedToken: any = jwtDecode(authToken);
       // Store the authentication token in local storage
       localStorage.setItem('authToken', authToken);
-
-
+  
       // You can also store other user details if needed
        localStorage.setItem('userInfo', JSON.stringify(decodedToken));
 
@@ -49,6 +48,11 @@ export class Auth1Service {
     }
   }
 
+
+  resetPassword(email: string): Observable<any> {
+    const body = { email };
+    return this.http.post<string>(`${this.apiUrl}/register/password-reset-request`, body, { responseType: 'text' as 'json' })
+  }
 
 
 //////////////////
@@ -62,10 +66,25 @@ login11(email: string, password: string): Observable<any> {
     );
 }
 
-private handleAuthentication11(token: string): void {
+handleAuthentication11(token: string): void {
   if (token) {
+    const decodedToken: any = jwtDecode(token);
+
+    // Extract user information
+    const firstName = decodedToken.firstName;
+    const lastName = decodedToken.lastName;
+    const role = decodedToken.role;
+    const email = decodedToken.email;
+
+    // Save user information in session storage
+    sessionStorage.setItem('firstName', firstName);
+    sessionStorage.setItem('lastName', lastName);
+    sessionStorage.setItem('role', role);
+    sessionStorage.setItem('email', email);
+
     // Save the token in session storage
     sessionStorage.setItem('authToken', token);
+    this.router.navigate(['/dashboard']); // Adjust the route based on your application
 
     // Other handling logic if needed
   } else {
@@ -74,10 +93,28 @@ private handleAuthentication11(token: string): void {
   }
 }
 
+getRole(role:String) {
+      this.roleAs = sessionStorage.getItem('role');
+          if(this.roleAs==role)
+        return true;
+      return false
+    }
+
+_is_logged(): boolean {
+    return !!sessionStorage.getItem("authToken");
+    }
 logout(): void {
-  // Remove the authentication token from session storage
+  sessionStorage.removeItem('firstName');
+  sessionStorage.removeItem('lastName');
+  sessionStorage.removeItem('role');
+  sessionStorage.removeItem('email');
   sessionStorage.removeItem('authToken');
+  this.router.navigate(['/login']); 
+
 }
+
+get token(){
+  return   sessionStorage.getItem('authToken');
 
 }
 

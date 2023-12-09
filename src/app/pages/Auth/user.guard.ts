@@ -6,7 +6,7 @@ import { Auth1Service } from 'src/app/services/auth1.service';
 @Injectable({
   providedIn: 'root'
 })
-export class RoleGuardGuard implements CanActivate {
+export class UserGuard implements CanActivate {
   constructor(private authService: Auth1Service) {
     }
   canActivate(
@@ -17,5 +17,5 @@ export class RoleGuardGuard implements CanActivate {
         }
         this.authService.logout();
     return false;
-    } 
+    }
 }

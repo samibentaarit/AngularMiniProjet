@@ -12,7 +12,8 @@ export class BlocService {
 
   constructor(private http: HttpClient) { }
   getAllBlocs() {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Bloc[]>(environment.url + '/bloc', { headers })
       .pipe(
         tap((blocs: Bloc[]) => {
@@ -23,38 +24,45 @@ export class BlocService {
   }
 
   getBlocById(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Bloc>(environment.url + '/bloc/' + id, { headers });
   }
 
   addBloc(bloc:{ nomBloc: string; capaciteBloc: number;
   }) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.post<Bloc>(environment.url + '/bloc', bloc, { headers });
   }
   addBlocToFoyer(idFoyer: number, bloc: any): Observable<any> {
     const url = `${environment.url}/bloc/${idFoyer}/add-bloc`;
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.post<any>(url, bloc, { headers }); // Spécification du type de réponse attendue
   }
   mettreAJourBlocDansFoyer(idFoyer: number, idBloc: number, bloc: any): Observable<any> {
     const url = `${environment.url}/bloc/${idFoyer}/bloc/${idBloc}`;
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.put<any>(url, bloc, { headers });
   }
 
   updateBloc(id: number, bloc: Bloc) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.put<Bloc>(environment.url + '/bloc/' + id, bloc, { headers });
   }
 
   deleteBloc(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.delete(environment.url + '/bloc/' + id, { headers });
   }
 
   getBlocsByFoyerId(idFoyer: number): Observable<Bloc[]> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Bloc[]>(`${environment.url}/foyer/${idFoyer}/blocs`, { headers });
   }
 

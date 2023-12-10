@@ -57,20 +57,30 @@ export class UniversiteService {
   }
   assignClubToUniversity(universityId: number, clubId: number): Observable<any> {
     const authToken = sessionStorage.getItem('authToken');
-    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    });
+
     const url = `${environment.url}/universites/${universityId}/clubs/${clubId}`;
-    return this.http.post(url, {});
+
+    return this.http.post(url, {}, { headers });
   }
   removeClubFromUniversity(universityId: number, clubId: number): Observable<any> {
     const authToken = sessionStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     const url = `${environment.url}/universites/${universityId}/clubs/${clubId}`;
-    return this.http.delete(url);
+    return this.http.delete(url, { headers });
   }
 
   getClubsByUniversity(universityId: number): Observable<Club[]> {
     const authToken = sessionStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     const url = `${environment.url}/universites/${universityId}/clubs`;
-    return this.http.get<Club[]>(url);}}
+    return this.http.get<Club[]>(url, { headers });
+  }
+  
+  
+  
+  }
 

@@ -1,16 +1,16 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-      <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
-        <div class="input-group input-group-alternative">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-search"></i></span>
+      <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto  mb-4">
+        <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+          <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+            <input class="form-control" placeholder="Search" type="text" (focus)="focus = true"
+                   (blur)="focus = false" [(ngModel)]="searchTerm" (input)="search()" >
           </div>
-          <input class="form-control" placeholder="Search" type="text" (focus)="focus = true"
-                 (blur)="focus = false" [(ngModel)]="searchTerm" (input)="search()" >
         </div>
-      </div>
       </form>
       <!-- Table -->
       <div class="row">
@@ -29,46 +29,45 @@
               </div>
             </div>
             <div class="bg-gradient-pink">
-            <div class="table-responsive  ">
-              <table class="table align-items-center table-flush">
-                <thead class="bg-gradient-pink">
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Numero de Chambre</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Prix</th>
-                  <th scope="col">Equipement</th>
-                  <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let chambre of filteredChambres">
-                  <th scope="row">{{ chambre.idChambre }}</th>
-                  <td>{{ chambre.numeroChambre }}</td>
-                  <td>{{ chambre.typeC }}</td>
-                  <td>{{ chambre.prix }}</td>
-                  <td>{{ chambre.equipements }}
-
-                    <button type="button" class="btn btn-sm btn-primary" ngxClipboard [cbContent]="chambre.idChambre" (cbOnSuccess)="copy = chambre.idChambre" (click)="redirectToChambreDetails(chambre.idChambre)">
-                      <i class="fas fa-cart-plus"></i>
-                    </button>
-                  </td>
-                  <td class="text-right">
-                    <button type="button" class="btn btn-sm btn-primary" (click)="openEditDialog(chambre.idChambre, chambre.numeroChambre, chambre.typeC)">
-                      <i class="fas fa-pencil-alt"></i>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-danger" (click)="deleteChambre(chambre.idChambre)">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+              <div class="table-responsive  ">
+                <table class="table align-items-center table-flush">
+                  <thead class="bg-gradient-pink">
+                  <tr>
+                    <th scope="col">Numero de Chambre</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Equipement</th>
+                    <th scope="col"></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let chambre of filteredChambres">
+                    <td>{{ chambre.numeroChambre }}</td>
+                    <td>{{ chambre.typeC }}</td>
+                    <td>{{ chambre.prix }}</td>
+                    <td>{{ chambre.equipements }}
+                      <button type="button" class="btn btn-sm btn-primary" ngxClipboard [cbContent]="chambre.idChambre" (cbOnSuccess)="copy = chambre.idChambre" (click)="redirectToChambreDetails(chambre.idChambre)">
+                        <i class="fas fa-cart-plus"></i>
+                      </button>
+                    </td>
+                    <td class="text-right">
+                      <button type="button" class="btn btn-sm btn-primary" (click)="openEditDialog(chambre.idChambre, chambre.numeroChambre, chambre.typeC)">
+                        <i class="fas fa-pencil-alt"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-danger" (click)="deleteChambre(chambre.idChambre)">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
-</div>
+

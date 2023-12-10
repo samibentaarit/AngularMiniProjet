@@ -1,3 +1,4 @@
+// chambre-dialog.component.ts
 import {Component, OnInit, Inject, Output, EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -54,6 +55,7 @@ export class ChambreDialog implements OnInit {
             }
           );
         } else {
+          // Le numéro de chambre existe déjà, ajouter un message d'erreur
           this.errorMessages = ['Le numéro de chambre existe déjà.'];
         }
       },

@@ -1,3 +1,5 @@
+// chambre.service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,25 +15,21 @@ export class ChambreService {
   constructor(private http: HttpClient) {}
 
   getAllChambres(): Observable<Chambre[]> {
-    const authToken = sessionStorage.getItem('authToken');
-    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get<Chambre[]>(environment.url + '/chambre', { headers });
   }
 
   getChambreById(id: string): Observable<Chambre> {
-    const authToken = sessionStorage.getItem('authToken');
-    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get<Chambre>(environment.url + '/chambre/' + id, { headers });
   }
 
   isNumeroChambreExists(numeroChambre: number): Observable<boolean> {
-    const authToken = sessionStorage.getItem('authToken');
-    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get<boolean>(`${environment.url}/chambre/exists/${numeroChambre}`, { headers });
   }
   addChambre(chambre: Chambre): Observable<Chambre> {
-    const authToken = sessionStorage.getItem('authToken');
-    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<Chambre>(environment.url + '/chambre', chambre, { headers });
   }
 
@@ -67,4 +65,5 @@ export class ChambreService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get<Equipement[]>(environment.url + `/equipement?sortOrder=${sortOrder}`, { headers });
   }
+
 }

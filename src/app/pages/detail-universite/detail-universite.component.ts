@@ -51,7 +51,7 @@ export class DetailUniversiteComponent {
     // Subscribe to route params to get the university ID from the URL
     this.route.params.subscribe(params => {
       this.idUniversite = +params['id']; // Convert id to a number
-
+console.log(this.idUniversite)
 
       // this.universiteService.getClubsByUniversity(this.idUniversite)
       //   .subscribe(clubs1 => this.clubs = clubs1);

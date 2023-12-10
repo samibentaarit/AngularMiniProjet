@@ -42,7 +42,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'equipement',           component: EquipementComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
     { path: 'chambre-details/:id', component: ChambreDetailsComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
     { path: 'maps',           component: MapsComponent },
-    { path: 'uni',           component: UniversiteComponent ,  canActivate:[AuthentificationGuard,UserGuard] }, 
+    { path: 'uni',           component: UniversiteComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
     { path: 'foyer',          component:FoyerComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
     { path: 'bloc/:idFoyer', component: BlocComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
     { path: 'foyer/consulterblocs/:idFoyer', component: DetailsfoyerComponent ,  canActivate:[AuthentificationGuard,UserGuard]  },

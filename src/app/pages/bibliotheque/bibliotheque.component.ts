@@ -32,6 +32,8 @@ export class BibliothequeComponent {
     this.getAllBibliotheques();
   }
 
+
+
   getAllBibliotheques() {
     this.bibliothequeService.getBibliothequeByBlocId(this.idBloc).subscribe(
       (data: Bibliotheque) => {
@@ -150,14 +152,20 @@ export class BibliothequeDialog implements OnInit {
     const { bibliotheque, idBloc } = this.data;
     this.idBloc = this.data.idBloc;
 
-    this.bibliothequeForm = this.formBuilder.group({
-      titreBibliotheque: [bibliotheque.titreBibliotheque, Validators.required],
-      descriptionBibliotheque: [bibliotheque.descriptionBibliotheque, Validators.required]
-    });
+    if (bibliotheque) {
+      this.bibliothequeForm = this.formBuilder.group({
+        titreBibliotheque: [bibliotheque?.titreBibliotheque || '', Validators.required],
+        descriptionBibliotheque: [bibliotheque?.descriptionBibliotheque || '', Validators.required]
+      });
 
-    // Ajoutez une propriété pour l'ID du bloc dans le formulaire
-    this.bibliothequeForm.addControl('idBloc', this.formBuilder.control(idBloc, Validators.required));
+      // Ajoutez une propriété pour l'ID du bloc dans le formulaire
+      this.bibliothequeForm.addControl('idBloc', this.formBuilder.control(idBloc, Validators.required));
+    } else {
+      // Gérer le cas où bibliotheque n'est pas défini
+      console.error('Bibliotheque is undefined');
+    }
   }
+
 
   submit() {
     if (this.bibliothequeForm.invalid) {
@@ -165,17 +173,24 @@ export class BibliothequeDialog implements OnInit {
     }
 
     const formData = this.bibliothequeForm.value;
-    const bibliotheque: Bibliotheque = {
+    const bibliotheque:  { idBloc: any; titreBibliotheque: any; descriptionBibliotheque: any } = {
+      idBloc:formData.idBloc,
       titreBibliotheque: formData.titreBibliotheque,
-      descriptionBibliotheque: formData.descriptionBibliotheque,
-       bloc :formData.bloc,
-        idBloc:formData.idBloc
+      descriptionBibliotheque: formData.descriptionBibliotheque
     };
 
-    this.bibliothequeService.addBibliotheque(this.idBloc, bibliotheque).subscribe((res: any) => {
-      this.dialogRef.close();
-    });
-  }
+    this.bibliothequeService.ajouterBibliothequeAuBloc(this.idBloc, bibliotheque).subscribe(
+      (res: any) => {
+
+        this.dialogRef.close();
+        console.log(res.text); // Accès au texte de la réponse
+      },
+        (error: any) => {
+          // Gérer les erreurs de la requête
+          console.log(JSON.stringify(error));
+        }
+    );
+    }
 
     onCancel(): void {
         this.dialogRef.close();

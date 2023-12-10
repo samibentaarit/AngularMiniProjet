@@ -1,6 +1,9 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Rechercher par le nom du bloc" [(ngModel)]="searchTerm" (input)="search()">
+      </div>
       <!-- Table -->
       <div class="row">
         <div class="col">

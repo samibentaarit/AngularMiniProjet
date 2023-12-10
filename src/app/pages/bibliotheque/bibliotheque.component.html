@@ -32,19 +32,18 @@
                   <th scope="row">{{ bibliothequeAssociee.idBibliotheque }}</th>
                   <td>{{ bibliothequeAssociee.titreBibliotheque }}</td>
                   <td>{{ bibliothequeAssociee.descriptionBibliotheque }}</td>
-                  <td class="text-right">
-                    <div ngbDropdown placement="bottom-right">
-                      <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                        <i class="fas fa-ellipsis-v"></i>
-                      </a>
-                      <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item"
-                           (click)="openEditDialog(bibliothequeAssociee.idBibliotheque, bibliothequeAssociee.titreBibliotheque, bibliothequeAssociee.descriptionBibliotheque)">Edit</a>
-                        <a class="dropdown-item"
-                           (click)="deleteBibliotheque(bibliothequeAssociee.idBibliotheque)">Delete</a>
+                  <td class="text-right buttons-column">
 
-                      </div>
-                    </div>
+                  <button type="button" class="btn btn-sm btn-primary" (click)="openEditDialog(bibliothequeAssociee.idBibliotheque, bibliothequeAssociee.titreBibliotheque, bibliothequeAssociee.descriptionBibliotheque)">Edit
+                          <i class="fas fa-pencil-alt"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-sm btn-danger" (click)="deleteBibliotheque(bibliothequeAssociee.idBibliotheque)">Delete
+                          <i class="fas fa-trash"></i>
+                        </button>
+
+
+
                     <div class="qr-code">
                       <qr-code [value]="qrCodeText" [size]="60"></qr-code>
                     </div>

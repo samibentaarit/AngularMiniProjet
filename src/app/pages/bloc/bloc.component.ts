@@ -4,6 +4,7 @@ import { BlocService } from "../../services/bloc.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import {Suggestion} from "../../models/suggestion";
 
 
 @Component({
@@ -14,6 +15,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class BlocComponent implements OnInit {
   blocs: Bloc[];
   idFoyer: number;
+  filtredBloc: Bloc[] ;
+  Blocs: Bloc[];
+
+  searchTerm: string = '' ;
 
   constructor(
     private blocService: BlocService,
@@ -33,11 +38,18 @@ export class BlocComponent implements OnInit {
   refresh(): void {
     this.getAllBlocs();
   }
+  search() {
+    this.filtredBloc = this.Blocs.filter(bloc =>
+        bloc.nomBloc.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
 
   getAllBlocs() {
     this.blocService.getBlocsByFoyerId(this.idFoyer).subscribe(
       (data: Bloc[]) => {
         this.blocs = data;
+        this.filtredBloc = this.blocs;
+
         console.log('Blocs associés au foyer récupérés :', data);
       },
       (error) => {
@@ -121,6 +133,7 @@ export class BlocDialog implements OnInit {
   blocForm: FormGroup;
   idFoyer: number;
 
+
   constructor(
     public dialogRef: MatDialogRef<BlocDialog>,
     private formBuilder: FormBuilder,
@@ -137,6 +150,8 @@ export class BlocDialog implements OnInit {
     this.idFoyer = this.data.idFoyer;
     console.log(this.idFoyer);
   }
+
+
 
   submit() {
     console.log(this.idFoyer);

@@ -43,7 +43,7 @@ export class BibliothequeService {
   }
 
 
-  ajouterBibliothequeAuBloc(idBloc: number, bibliotheque: Bibliotheque): Observable<any> {
+  ajouterBibliothequeAuBloc(idBloc: number, bibliotheque: any): Observable<any> {
     const url = `${environment.url}/bibliotheque/${idBloc}/bibliotheques`;
     const authToken = sessionStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);

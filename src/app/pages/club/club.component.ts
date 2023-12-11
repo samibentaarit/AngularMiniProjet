@@ -17,6 +17,7 @@ export class ClubComponent implements OnInit {
   clubs: Club[]; // Change the type to match your Universite model.
   searchTerm: string = '';
   filteredClubs: Club[];
+  focus = false;
   constructor(
     private clubService: ClubService
     , public dialog: MatDialog) {

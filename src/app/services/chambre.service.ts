@@ -15,31 +15,42 @@ export class ChambreService {
   constructor(private http: HttpClient) {}
 
   getAllChambres(): Observable<Chambre[]> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Chambre[]>(environment.url + '/chambre', { headers });
   }
 
   getChambreById(id: string): Observable<Chambre> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Chambre>(environment.url + '/chambre/' + id, { headers });
   }
 
   isNumeroChambreExists(numeroChambre: number): Observable<boolean> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<boolean>(`${environment.url}/chambre/exists/${numeroChambre}`, { headers });
   }
   addChambre(chambre: Chambre): Observable<Chambre> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.post<Chambre>(environment.url + '/chambre', chambre, { headers });
   }
 
   updateChambre(id: number, chambre: Chambre): Observable<Chambre> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.put<Chambre>(environment.url + '/chambre/' + id, chambre, { headers });
   }
 
   deleteChambre(id: number): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.delete(environment.url + '/chambre/' + id, { headers });
   }
 
@@ -49,20 +60,23 @@ export class ChambreService {
   // }
 
   addEquipementToChambre(chambreId: number, equipementId: number): Observable<Chambre> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.post<Chambre>(
       `${environment.url}/chambre/${chambreId}/equipements/${equipementId}`, {}, { headers }
     );
   }
 
   removeEquipementFromChambre(chambreId: number, equipementId: number): Observable<Chambre> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.delete<Chambre>(
       `${environment.url}/chambre/${chambreId}/equipements/${equipementId}`, { headers }
     );
   }
   getAllEquipements(sortOrder: any): Observable<Equipement[]> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.get<Equipement[]>(environment.url + `/equipement?sortOrder=${sortOrder}`, { headers });
   }
 

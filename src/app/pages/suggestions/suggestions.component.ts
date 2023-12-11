@@ -15,7 +15,8 @@ export class SuggestionsComponent implements OnInit {
   suggestions: Suggestion[];
   private idFoyer: number;
   filtredSuggestions: Suggestion[] ;
-  searchTerm: string = '' ;
+  searchTerm: String = '';
+  focus = false;
   constructor(
     private suggestionService: SuggestionService,
     public dialog: MatDialog,

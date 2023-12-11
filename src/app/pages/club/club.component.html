@@ -1,11 +1,17 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <div class="col-md-6">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Rechercher par nom club" [(ngModel)]="searchTerm" (input)="search()">
+      <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto  mb-4">
+        <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+          <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+            <input class="form-control" placeholder="Search" type="text" (focus)="focus = true"
+                   (blur)="focus = false" [(ngModel)]="searchTerm" (input)="search()" >
+          </div>
         </div>
-      </div>
+      </form>
       <!-- Add Club Button -->
       <div class="row">
         <div class="col">

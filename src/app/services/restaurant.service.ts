@@ -27,10 +27,7 @@ export class RestaurantService {
   getRestaurantById(id: number) {
     const authToken = sessionStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
-    return this.http.get<Restaurant[
-
-
-      ]>(environment.url + '/restaurant/'+'byid/'+ id, { headers });
+    return this.http.get<Restaurant>(environment.url + '/restaurant/'+'byid/'+ id, { headers });
   }
 
   addRestaurant(restaurant:{ nomRestaurant: string}) {

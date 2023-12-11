@@ -23,10 +23,10 @@ export class ReservationService {
     return this.http.get<Reservation>(environment.url + '/reservation/' + id, { headers });
   }
 
-  addReservation(reservation:{ anneeUniversitaire: Date; estValide: boolean}) {
+  addReservation(reservation:{ anneeUniversitaire: Date;}) {
     const authToken = sessionStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
-    return this.http.post<Reservation>(environment.url + '/reservation'+'saveReservation', reservation, { headers });
+    return this.http.post<Reservation>(environment.url + '/reservation/'+'saveReservation', reservation, { headers });
   }
 
   updateReservation(id: number, reservation: Reservation) {
@@ -51,6 +51,13 @@ export class ReservationService {
     const authToken = sessionStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.put(environment.url + '/reservation/' + id + '/archiver', { headers });
+  }
+
+
+  addReservationToRestaurant(id: number,reservation:any):Observable<any> {
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
+    return this.http.post<Reservation>( environment.url + '/reservation/'+'ajouterReservation/' + id,reservation, { headers });
   }
 
 }

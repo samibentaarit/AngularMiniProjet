@@ -45,9 +45,10 @@ export class DetailUniversiteComponent {
   }
 
   ngOnInit() {
-
+ this.loadClubs();
     this.commentaires = this.commentService.getCommentaires();
     this.getAllClubs();
+    this.getClubsByUniversity(this.idUniversite);
     // Subscribe to route params to get the university ID from the URL
     this.route.params.subscribe(params => {
       this.idUniversite = +params['id']; // Convert id to a number
@@ -202,7 +203,7 @@ console.log(this.idUniversite)
   template: `
     <!-- app-commentaire.component.html -->
     <div class="comment-container">
-      <h3>Ajouter un commentaire</h3>
+
       <div class="comment-input">
         <textarea [(ngModel)]="nouveauCommentaire" placeholder="Écrivez votre commentaire"></textarea>
         <button class="add-button" (click)="ajouterCommentaire()">Ajouter</button>

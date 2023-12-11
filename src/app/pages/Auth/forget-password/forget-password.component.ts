@@ -39,6 +39,9 @@ export class ForgetPasswordComponent {
     this.authService.resetPassword(this.emailForm.value.emailreset).subscribe(response => {
       // Handle successful login, e.g., store token, navigate to home page, etc.
       console.log('Email submitted successfully', response);
+      alert('PLEASE check your email adress to finish the reset password steps');
+      // Redirect to the login page
+      this.router.navigate(['/login']);
     }, error => {
       if (error.status === 404) {
         console.error('User not found', error);

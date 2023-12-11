@@ -17,8 +17,8 @@ export class NewPassComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private http :HttpClient,
-    private route: ActivatedRoute
-
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.newPasswordForm = this.formBuilder.group({
       newPassword: ['', [Validators.required]], // Set your default password here
@@ -48,7 +48,11 @@ console.log(this.token)
         // Handle the response as needed
         console.log( response);
         console.log(this.token)
+        // Show success alert
+        alert('Password reset successfully');
 
+        // Redirect to the login page
+        this.router.navigate(['/login']);
       },
       (error) => {
         // Handle the error

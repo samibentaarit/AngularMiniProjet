@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import {Suggestion} from "../../models/suggestion";
+import {Chambre} from "../../models/chambre";
 
 
 @Component({
@@ -15,10 +16,9 @@ import {Suggestion} from "../../models/suggestion";
 export class BlocComponent implements OnInit {
   blocs: Bloc[];
   idFoyer: number;
-  filtredBloc: Bloc[] ;
-  Blocs: Bloc[];
-
-  searchTerm: string = '' ;
+  filteredBlocs: Bloc[];
+  searchTerm: String = '';
+  focus = false;  Blocs: Bloc[];
 
   constructor(
     private blocService: BlocService,
@@ -38,17 +38,27 @@ export class BlocComponent implements OnInit {
   refresh(): void {
     this.getAllBlocs();
   }
+  // search() {
+  //   this.filtredBloc = this.Blocs.filter(bloc =>
+  //       bloc.nomBloc.toLowerCase().includes(this.searchTerm.toLowerCase())
+  //   );
+  // }
   search() {
-    this.filtredBloc = this.Blocs.filter(bloc =>
+    // Perform filtering based on the entered search term
+    if (this.searchTerm.trim() !== '') {
+      this.filteredBlocs = this.blocs.filter(bloc =>
         bloc.nomBloc.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+      );
+    } else {
+      // If the search term is empty, display all blocs
+      this.filteredBlocs = this.blocs;
+    }
   }
-
   getAllBlocs() {
     this.blocService.getBlocsByFoyerId(this.idFoyer).subscribe(
       (data: Bloc[]) => {
         this.blocs = data;
-        this.filtredBloc = this.blocs;
+        this.filteredBlocs = this.blocs;
 
         console.log('Blocs associés au foyer récupérés :', data);
       },

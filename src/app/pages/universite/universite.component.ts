@@ -28,7 +28,7 @@ export class UniversiteComponent implements OnInit {
   averageFoyerCapacity: number;
   searchTerm: string = '';
   filteredUniversites: Universite[];
-clubs : Club [] ;
+  clubs : Club [] ;
 foyer : Foyer ;
 
   constructor(

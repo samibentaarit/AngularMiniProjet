@@ -1,61 +1,66 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <div class="form-group">
-        <label for="sortOrder"><h3>Tri par Prix</h3></label>
-        <div class="btn-group ">
-          <button type="button" class="btn btn-secondary bg-gradient-pink" (click)="onSortOrderChange('asc')">
-            <i class="fas fa-arrow-up"></i>
-          </button>
-          <button type="button" class="btn btn-secondary bg-gradient-pink" (click)="onSortOrderChange('desc')">
-           <i class="fas fa-arrow-down"></i>
-          </button>
-        </div>
-      </div>
       <div>
-      </div>
-      <!-- Chambre details card -->
-      <div class="row">
-        <div class="col-xl-6 col-lg-12">
-          <div class="card card-stats bg-gradient-pink mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h3 class="card-title  mb-0">Chambre Number</h3>
-                  <span class="h2 font-weight-bold mb-0">{{ chambre?.numeroChambre }}</span>
+        <!-- Chambre details card -->
+        <div class="row">
+          <div class="col-xl-6 col-lg-12">
+            <div class="card card-stats bg-gradient-pink mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h3 class="card-title  mb-0">Chambre Number</h3>
+                    <span class="h2 font-weight-bold mb-0">{{ chambre?.numeroChambre }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-bed"></i>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-auto">
-                  <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                    <i class="fas fa-bed"></i>
+              </div>
+            </div>
+          </div>
+          <!-- Utilisation de la directive -->
+          <!-- Display the price -->
+          <div class="col-xl-6 col-lg-12">
+            <div class="card card-stats bg-gradient-pink mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h3 class="card-title  mb-0">Chambre Price</h3>
+                    <span class="h2 font-weight-bold mb-0">{{ chambre?.prix }}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+                      <i class="fas fa-money-bill"></i>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- Utilisation de la directive -->
-        <!-- Display the price -->
-        <div class="col-xl-6 col-lg-12">
-          <div class="card card-stats bg-gradient-pink mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h3 class="card-title  mb-0">Chambre Price</h3>
-                  <span class="h2 font-weight-bold mb-0">{{ chambre?.prix }}</span>
-                </div>
-                <div class="col-auto">
-                  <div class="icon icon-shape bg-success text-white rounded-circle shadow">
-                    <i class="fas fa-money-bill"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
+      <div class="my-4"></div>
       <!-- Add a dropdown to select the sorting order -->
-<div></div>
+      <div class="form-group row">
+        <div class="col-md-2"> <!-- Adjust the column size based on your design -->
+          <label for="sortOrder" ><h3>Tri Equipement par Prix</h3></label>
+        </div>
+        <div class="col-md-10">
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary bg-gradient-pink" (click)="onSortOrderChange('asc')">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+            <button type="button" class="btn btn-secondary bg-gradient-pink" (click)="onSortOrderChange('desc')">
+              <i class="fas fa-arrow-down"></i>
+            </button>
+          </div>
+        </div>
+      </div>
       <!-- Other Chambre details cards go here -->
+      <div>
         <div class="row">
           <div class="col">
             <div class="card shadow">
@@ -68,43 +73,38 @@
               </div>
 
               <div class="bg-gradient-pink">
-              <div class="table-responsive">
-                <table class="table align-items-center table-flush">
-                  <thead class="bg-gradient-pink">
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nom de l'équipement</th>
-                    <th scope="col">Prix de l'équipement</th>
-                    <th scope="col"></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let equipement of equipements">
-                    <th scope="row">{{ equipement.idEquipement }}</th>
-                    <td>{{ equipement.nom }}</td>
-                    <td>{{ equipement.prixEquipement }}</td>
-                    <td class="text-right">
-<!--                      <button type="button" class="btn btn-success" (click)="addEquipementToChambre(equipement.idEquipement)"  [disabled]="!canAddEquipement">-->
-<!--                        Ajouter au chambre-->
-<!--                      </button>-->
-<!--                      <button type="button" class="btn btn-danger" (click)="removeEquipementFromChambre(equipement.idEquipement)">-->
-<!--                        Supprimer du chambre-->
-<!--                      </button>-->
-                      <button type="button" class="btn btn-sm btn-primary" (click)="addEquipementToChambre(equipement.idEquipement)"  [disabled]="!canAddEquipement">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-danger" (click)="removeEquipementFromChambre(equipement.idEquipement)">
-                        <i class="fas fa-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
+                <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                    <thead class="bg-gradient-pink">
+                    <tr>
+                      <th scope="col" style="display: none;">ID</th>
+                      <th scope="col">Nom de l'équipement</th>
+                      <th scope="col">Prix de l'équipement</th>
+                      <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let equipement of equipements">
+                      <th scope="row" style="display: none;">{{ equipement.idEquipement }}</th>
+                      <td>{{ equipement.nom }}</td>
+                      <td>{{ equipement.prixEquipement }}</td>
+                      <td class="text-right">
+                        <button type="button" class="btn btn-sm btn-primary" (click)="addEquipementToChambre(equipement.idEquipement)" [disabled]="!canAddEquipement">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger" (click)="removeEquipementFromChambre(equipement.idEquipement)">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
     </div>
+  </div>
 </div>

@@ -46,7 +46,6 @@ export class SuggestionsComponent implements OnInit {
     );
   }
   search() {
-    // Filtrer les universités basées sur le terme de recherche
     this.filtredSuggestions = this.suggestions.filter(suggestion =>
       suggestion.tagSuggestion.toLowerCase().includes(this.searchTerm.toLowerCase())
     );

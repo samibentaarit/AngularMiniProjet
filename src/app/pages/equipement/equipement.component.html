@@ -1,7 +1,18 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-
+      <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto mb-4">
+        <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+          <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+            <input class="form-control" placeholder="Search" type="text" (focus)="focus = true"
+                   (blur)="focus = false" [(ngModel)]="searchTerm" (input)="search()" >
+          </div>
+        </div>
+      </form>
+      <!-- Table -->
       <!-- Table -->
       <div class="row">
         <div class="col">
@@ -19,38 +30,37 @@
               </div>
             </div>
             <div class="bg-gradient-pink">
-            <div class="table-responsive">
-              <table class="table align-items-center table-flush">
-                <thead class="bg-gradient-pink">
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Nom de l'équipement</th>
-                  <th scope="col">Prix de l'équipement</th>
-                  <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <tr *ngFor="let equipement of equipements" (click)="onSelectEquipement(equipement)">
-                  <th scope="row">{{ equipement.idEquipement }}</th>
-                  <td>{{ equipement.nom }}</td>
-                  <td>{{ equipement.prixEquipement }}</td>
-                  <td class="text-right">
-                    <button type="button" class="btn btn-sm btn-primary" (click)="openEditDialog(equipement.idEquipement, equipement.nom, equipement.prixEquipement)">
-                      <i class="fas fa-pencil-alt"></i>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-danger" (click)="deleteEquipement(equipement.idEquipement)">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+              <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                  <thead class="bg-gradient-pink">
+                  <tr>
+                    <th scope="col" style="display: none;">ID</th>
+                    <th scope="col">Nom de l'équipement</th>
+                    <th scope="col">Prix de l'équipement</th>
+                    <th scope="col"></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let equipement of filteredEquipments" (click)="onSelectEquipement(equipement)">
+                    <th scope="row" style="display: none;">{{ equipement.idEquipement }}</th>
+                    <td>{{ equipement.nom }}</td>
+                    <td>{{ equipement.prixEquipement }}</td>
+                    <td class="text-right">
+                      <button type="button" class="btn btn-sm btn-primary" (click)="openEditDialog(equipement.idEquipement, equipement.nom, equipement.prixEquipement)">
+                        <i class="fas fa-pencil-alt"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-danger" (click)="deleteEquipement(equipement.idEquipement)">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>

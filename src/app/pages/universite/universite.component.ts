@@ -17,7 +17,7 @@ import {ClubService} from "../../services/club.service";
 import { Club } from 'src/app/models/club';
 import {  Input, Output, EventEmitter } from '@angular/core';
 
-
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-universite',
@@ -30,7 +30,7 @@ export class UniversiteComponent implements OnInit {
   filteredUniversites: Universite[];
   clubs : Club [] ;
 foyer : Foyer ;
-  focus = false;
+
   constructor(
     private universiteService: UniversiteService
     , private foyerService: FoyerService
@@ -45,7 +45,34 @@ foyer : Foyer ;
    // this.generatePdf() ;
 
   }
+  generatePdf() {
+    const jsPDF = require('jspdf');
+    require('jspdf-autotable');
 
+    const pdf = new jsPDF();
+    const pageTitle = 'Liste des Universités';
+    const header = [['ID', 'Nom de l\'Université', 'Adresse']];
+
+    // Ajouter des données (par exemple, utiliser filteredUniversites)
+    const data = this.filteredUniversites.map(universite => [
+      universite.idUniversite.toString(),
+      universite.nomUniversite,
+      universite.adresse,
+    ]);
+
+    pdf.autoTable({
+      head: header,
+      body: data,
+      startY: 40,
+    });
+
+    pdf.text(pageTitle, 14, 20);
+
+    // Sauvegarder le PDF
+    pdf.save('liste_universites.pdf');
+  }
+
+  // ...
 
   assignClubToUniversity(universityId: number, clubId: number): void {
     this.universiteService.assignClubToUniversity(universityId, clubId).subscribe(

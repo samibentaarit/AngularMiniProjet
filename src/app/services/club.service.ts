@@ -14,7 +14,7 @@ export class ClubService {
   getAllClubs(): Observable<Club[]> {
     const authToken = sessionStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
-    return this.http.get<Club[]>(environment.url + '/club/getAllClub', { headers });  }
+    return this.http.get<Club[]>(`${environment.url}/club/getAllClub`, { headers });  }
 
   getClubById(id: number): Observable<Club> {
     const authToken = sessionStorage.getItem('authToken');

@@ -22,7 +22,7 @@
               <table class="table align-items-center table-flush">
                 <thead class="bg-gradient-pink">
                 <tr>
-                  <th scope="col">ID</th>
+                  <th scope="col"class="d-none">ID</th>
                   <th scope="col">Nom du Foyer</th>
                   <th scope="col">Capacité du Foyer</th>
                   <th scope="col"></th>
@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let foyer of foyers">
-                  <th scope="row">{{ foyer.idFoyer }}</th>
+                  <th scope="row" class="d-none">{{ foyer.idFoyer }}</th>
                   <td>{{ foyer.nomFoyer }}</td>
                   <td>{{ foyer.capaciteFoyer }}</td>
                   <td class="text-right buttons-column">

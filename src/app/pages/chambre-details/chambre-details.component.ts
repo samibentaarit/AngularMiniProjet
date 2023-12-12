@@ -16,7 +16,11 @@ export class ChambreDetailsComponent implements OnInit {
   equipementsAjoutes: Equipement[] = [];
   canAddEquipement = true;
   sortOrder: string = 'asc';
+  isReserved: boolean = false;
 
+  reserve(): void {
+    this.isReserved = true;
+  }
 
   constructor(private route: ActivatedRoute, private chambreService: ChambreService) { }
 

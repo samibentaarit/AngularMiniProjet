@@ -101,10 +101,21 @@
                   </table>
                 </div>
               </div>
+<!--              <div class="justify-content-center mt-4 bg-gradient-pink">-->
+<!--                <button type="button" class="btn btn-primary">Réserver</button>-->
+<!--              </div>-->
+
             </div>
           </div>
         </div>
       </div>
+      <div class="text-center mt-4 ">
+        <button type="button" class="btn" [class.btn-primary]="!isReserved" [class.btn-success]="isReserved" (click)="reserve()">
+          {{ isReserved ? 'Réservé' : 'Réserver' }}
+        </button>
+      </div>
+
+    </div>
     </div>
   </div>
-</div>
+

@@ -26,6 +26,7 @@ import {SuggestionsComponent} from "../../pages/suggestions/suggestions.componen
 import {RestaurantComponent} from "../../pages/restaurant/restaurant.component";
 import { AdminGuard } from 'src/app/pages/Auth/admin.guard';
 import { AdminOrUserGuard } from 'src/app/pages/Auth/admin-or-user.guard';
+import { ReservationComponent, ReservationDialog } from 'src/app/pages/reservation/reservation.component';
 
 export const AdminLayoutRoutes: Routes = [
         //USER GUARDS
@@ -49,7 +50,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'bloc/:idFoyer', component: BlocComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
     { path: 'foyer/consulterblocs/:idFoyer', component: DetailsfoyerComponent ,  canActivate:[AuthentificationGuard,UserGuard]  },
     { path: 'foyer/suggestion/:idFoyer',          component:SuggestionsComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
+    { path: 'res/:id',           component: ReservationComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
     { path: 'restau',           component: RestaurantComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
+    { path: 'receive/:id',           component: ReservationDialog ,  canActivate:[AuthentificationGuard,UserGuard] },
 
         //ADMIN GUARDS
     { path: 'users',    component:UsersComponent,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },

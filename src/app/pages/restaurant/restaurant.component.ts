@@ -17,7 +17,8 @@ import { RestaurantService } from '../../services/restaurant.service';
 })
 export class RestaurantComponent implements OnInit {
   restaurants: Restaurant[];
-  searchValue:number ;
+  filteredRestaurants: Restaurant[] = [];
+  searchTerm = '';
 
 
   constructor(
@@ -25,31 +26,21 @@ export class RestaurantComponent implements OnInit {
     ,public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.refresh();
+    this.getAllRestaurants();
     console.log('ngOnInit')
 
   }
 
   refresh() {
-    if (this.searchValue)
-    {
+    this.getAllRestaurants();
+  }
 
-      console.log('search')
-      this.restaurantService.getRestaurantById(this.searchValue).subscribe(
-        (data: any) => {
-          this.restaurants = data;
-          console.log('data',data)
-          console.log('restaurant',this.restaurants)
 
-        },
-        (error) => {
-          console.error('Error loading Restaurants: ', error);
-        })}
-    else if (!this.searchValue){
-      console.log('getAll')
-      this.getAllRestaurants();
-    }
-    console.log('reseee',this.restaurants)
+  search() {
+    this.filteredRestaurants = this.restaurants.filter(restaurant =>
+      restaurant.nomRestaurant.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    console.log(this.filteredRestaurants);
 
   }
 
@@ -59,6 +50,7 @@ export class RestaurantComponent implements OnInit {
     this.restaurantService.getAllRestaurants().subscribe(
       (data: any) => {
         this.restaurants = data;
+        this.filteredRestaurants = this.restaurants;
       },
       (error) => {
         console.error('Error loading Restaurants: ', error);
@@ -150,10 +142,6 @@ export class RestaurantComponent implements OnInit {
     }
   }
 
-
-  onSearch(): void {
-    this.refresh();
-  }
 
 }
 
@@ -312,7 +300,7 @@ export class RestaurantEditDialog implements OnInit {
         const updatedRestaurant: Restaurant = {
           idRestaurant: this.data.idRestaurant,
           nomRestaurant: this.restaurantForm.value.nomRestaurant,
-          reservation: this.restaurantForm.value.reservation,
+          reservations: this.restaurantForm.value.reservation,
         };
 
         this.dialogRef.close(updatedRestaurant);

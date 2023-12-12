@@ -4,24 +4,19 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CommentaireService {
-  private key = 'commentaires';
+  private commentaires: string[] = [];
 
   getCommentaires(): string[] {
-    const commentairesStr = sessionStorage.getItem(this.key);
-    return commentairesStr ? JSON.parse(commentairesStr) : [];
+    return this.commentaires;
   }
 
   ajouterCommentaire(commentaire: string): void {
-    const commentaires = this.getCommentaires();
-    commentaires.push(commentaire);
-    sessionStorage.setItem(this.key, JSON.stringify(commentaires));
+    this.commentaires.push(commentaire);
   }
 
   supprimerCommentaire(index: number): void {
-    const commentaires = this.getCommentaires();
-    if (index >= 0 && index < commentaires.length) {
-      commentaires.splice(index, 1);
-      sessionStorage.setItem(this.key, JSON.stringify(commentaires));
+    if (index >= 0 && index < this.commentaires.length) {
+      this.commentaires.splice(index, 1);
     }
   }
 }

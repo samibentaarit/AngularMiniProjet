@@ -52,6 +52,9 @@
                         <button type="button" class="btn btn-sm btn-danger" (click)="deleteUniversite(universite.idUniversite)">
                           <i class="fas fa-trash"></i>
                         </button>
+                        <button type="button" class="btn btn-sm btn-secondary" [routerLink]="['/foyer']">
+                          <i class="fas fa-eye"></i> Consulter le foyer
+                        </button>
                         <button type="button" class="btn btn-sm btn-secondary" [routerLink]="['/detail', universite.idUniversite]">
                           <i class="fas fa-eye"></i> Détails
                         </button>

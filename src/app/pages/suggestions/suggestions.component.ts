@@ -273,9 +273,8 @@ export class SuggestionEditDialog {
 @Component({
   selector: 'app-comment',
   template: `
-    <!-- app-commentaire.component.html -->
     <div class="comment-container">
-
+      <h3>Ajouter un commentaire</h3>
       <div class="comment-input">
         <textarea [(ngModel)]="nouveauCommentaire" placeholder="Écrivez votre commentaire"></textarea>
         <button class="add-button" (click)="ajouterCommentaire()">Ajouter</button>
@@ -283,10 +282,7 @@ export class SuggestionEditDialog {
       <ul class="comment-list">
         <li *ngFor="let commentaire of commentaires; let i = index" class="comment-item">
           <div class="comment-content">
-            {{ commentaire }}
-          </div>
-          <div class="qr-code">
-            <qr-code [value]="commentaire" [size]="60"></qr-code>
+            <span>{{ commentaire }}</span>
           </div>
           <div class="comment-actions">
             <button class="delete-button" (click)="supprimerCommentaire(i)">Supprimer</button>
@@ -294,9 +290,8 @@ export class SuggestionEditDialog {
         </li>
       </ul>
     </div>
-
-
   `,
+  styleUrls: ['./suggestions.component.scss']
 
 })
 export class CommentComponent {
@@ -304,34 +299,32 @@ export class CommentComponent {
   @Input() commentaires: string[] = [];
   @Output() miseAJourCommentaires = new EventEmitter<void>();
   nouveauCommentaire: string = '';
-  constructor(private commentaireService: CommentaireService) {}
-  ngOnInit() {
-    this.commentaires = this.commentaireService.getCommentaires();
 
-    // Générer les QR codes lors de l'initialisation
-    this.genererQRCodes();
-
+  constructor(private commentService: CommentaireService) {
   }
+
+  ngOnInit() {
+    this.commentaires = this.commentService.getCommentaires();
+    this.genererQRCodes();
+  }
+
   private genererQRCodes() {
     this.commentaires.forEach((commentaire, index) => {
       const qrCodeCanvasId = `qrcode-canvas-${index}`;
-      QRCode.toCanvas(document.getElementById(qrCodeCanvasId), commentaire, (error) => {
-        if (error) {
-          console.error('Erreur lors de la génération du QR code:', error);
-        }
-      });
+      // Code de génération du QR code
     });
   }
+
   ajouterCommentaire() {
-    this.commentaireService.ajouterCommentaire(this.nouveauCommentaire);
+    this.commentService.ajouterCommentaire(this.nouveauCommentaire);
     this.nouveauCommentaire = '';
-    this.miseAJourCommentaires.emit(); // Émettre un événement pour notifier le parent
+    this.miseAJourCommentaires.emit();
   }
 
   supprimerCommentaire(index: number) {
-    this.commentaireService.supprimerCommentaire(index);
-    this.miseAJourCommentaires.emit(); // Émettre un événement pour notifier le parent
-  }}
-
+    this.commentService.supprimerCommentaire(index);
+    this.miseAJourCommentaires.emit();
+  }
+}
 
 

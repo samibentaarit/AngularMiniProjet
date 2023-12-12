@@ -75,12 +75,14 @@ handleAuthentication11(token: string): void {
     const lastName = decodedToken.lastName;
     const role = decodedToken.role;
     const email = decodedToken.email;
+    const id = decodedToken.id;
 
     // Save user information in session storage
     sessionStorage.setItem('firstName', firstName);
     sessionStorage.setItem('lastName', lastName);
     sessionStorage.setItem('role', role);
     sessionStorage.setItem('email', email);
+    sessionStorage.setItem('id', id);
 
     // Save the token in session storage
     sessionStorage.setItem('authToken', token);

@@ -1,11 +1,13 @@
-import { Component, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import { Suggestion } from "../../models/suggestion";
 import { SuggestionService } from "../../services/suggestion.service";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {environment} from "../../../environments/environment";
-
+import {CommentService} from "../../services/comment.service";
+import {CommentaireService} from "../../services/Commentaire.service";
+import * as QRCode from 'qrcode';
 @Component({
   selector: 'app-suggestions',
   templateUrl: './suggestions.component.html',
@@ -16,11 +18,13 @@ export class SuggestionsComponent implements OnInit {
   private idFoyer: number;
   filtredSuggestions: Suggestion[] ;
   searchTerm: String = '';
+  commentaires: string[] = [];
   focus = false;
   constructor(
     private suggestionService: SuggestionService,
     public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
+    private commentaireService: CommentaireService
   ) {}
 
   ngOnInit() {
@@ -62,6 +66,10 @@ export class SuggestionsComponent implements OnInit {
       }
     });
   }
+  rafraichirCommentaires() {
+    this.commentaires = this.commentaireService.getCommentaires();}
+  // Méthode appelée lorsque le composant Commentaire émet un nouvel événement
+
 
   refreshSuggestions(): void {
     this.loadSuggestions();
@@ -234,7 +242,7 @@ export class SuggestionEditDialog {
       };
 
       // Utiliser l'opérateur de coalescence nulle pour fournir des valeurs par défaut
-      const idFoyer = this.data?.suggestion.idFoyer ;
+      const idFoyer = this.data?.suggestion.idFoyer;
       const idSuggestion = this.data?.suggestion?.idSuggestion ?? undefined;
 
       // Vérifier si idFoyer et idSuggestion sont définis
@@ -260,5 +268,70 @@ export class SuggestionEditDialog {
       }
     }
   }
+
 }
+@Component({
+  selector: 'app-comment',
+  template: `
+    <!-- app-commentaire.component.html -->
+    <div class="comment-container">
+
+      <div class="comment-input">
+        <textarea [(ngModel)]="nouveauCommentaire" placeholder="Écrivez votre commentaire"></textarea>
+        <button class="add-button" (click)="ajouterCommentaire()">Ajouter</button>
+      </div>
+      <ul class="comment-list">
+        <li *ngFor="let commentaire of commentaires; let i = index" class="comment-item">
+          <div class="comment-content">
+            {{ commentaire }}
+          </div>
+          <div class="qr-code">
+            <qr-code [value]="commentaire" [size]="60"></qr-code>
+          </div>
+          <div class="comment-actions">
+            <button class="delete-button" (click)="supprimerCommentaire(i)">Supprimer</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+
+  `,
+
+})
+export class CommentComponent {
+
+  @Input() commentaires: string[] = [];
+  @Output() miseAJourCommentaires = new EventEmitter<void>();
+  nouveauCommentaire: string = '';
+  constructor(private commentaireService: CommentaireService) {}
+  ngOnInit() {
+    this.commentaires = this.commentaireService.getCommentaires();
+
+    // Générer les QR codes lors de l'initialisation
+    this.genererQRCodes();
+
+  }
+  private genererQRCodes() {
+    this.commentaires.forEach((commentaire, index) => {
+      const qrCodeCanvasId = `qrcode-canvas-${index}`;
+      QRCode.toCanvas(document.getElementById(qrCodeCanvasId), commentaire, (error) => {
+        if (error) {
+          console.error('Erreur lors de la génération du QR code:', error);
+        }
+      });
+    });
+  }
+  ajouterCommentaire() {
+    this.commentaireService.ajouterCommentaire(this.nouveauCommentaire);
+    this.nouveauCommentaire = '';
+    this.miseAJourCommentaires.emit(); // Émettre un événement pour notifier le parent
+  }
+
+  supprimerCommentaire(index: number) {
+    this.commentaireService.supprimerCommentaire(index);
+    this.miseAJourCommentaires.emit(); // Émettre un événement pour notifier le parent
+  }}
+
+
 

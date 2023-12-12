@@ -26,7 +26,8 @@ export class UniversiteService {
     return this.http.get<Universite>(environment.url + '/universites/' + id, { headers });
   }
 
-  addUniversite(universite:{ nomUniversite: string; adresse: string}) {const authToken = sessionStorage.getItem('authToken');
+  addUniversite(universite:{ nomUniversite: string; adresse: string}) {
+    const authToken = sessionStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
     return this.http.post<Universite>(environment.url + '/universites', universite, { headers });
   }

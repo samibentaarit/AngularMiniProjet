@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user';
+import { UserprofileService } from 'src/app/services/userprofile.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,10 +13,22 @@ export class UserProfileComponent implements OnInit {
   email: string;
   inputsDisabled: boolean = true; // Initially set to true
   infoForm: FormGroup;
+  
+  userId: number;
 
-  constructor(private fb: FormBuilder) {}
+
+  constructor(private fb: FormBuilder,private userProfileService: UserprofileService) {}
 
   ngOnInit() {
+    // Get userId from sessionStorage
+    const userIdFromStorage = sessionStorage.getItem('id');
+
+    // Check if userIdFromStorage is a valid number
+    this.userId = userIdFromStorage ? +userIdFromStorage : null;
+
+   
+
+
     this.email = sessionStorage.getItem('email') || '';
     this.firstName = sessionStorage.getItem('firstName') || '';
     this.lastName = sessionStorage.getItem('lastName') || '';
@@ -58,5 +72,34 @@ export class UserProfileComponent implements OnInit {
 
       return isValid ? null : { 'invalidLastName': true };
     };
+  }
+
+
+  onSubmit() {
+    // Check if the form is valid
+    if (this.infoForm.valid) {
+      // Create an object with the updated user data
+      const updatedUserData: any = {
+        firstName: this.infoForm.value.firstName,
+        lastName: this.infoForm.value.lastName,
+        // Add other fields as needed
+      };
+      sessionStorage.setItem('firstName', updatedUserData.firstName);
+      sessionStorage.setItem('lastName', updatedUserData.lastName);
+      // Call the service method to update user data
+      this.userProfileService.updateUserData(this.userId, updatedUserData).subscribe(
+        () => {
+          console.log('Updated user data:');
+          
+          // Optionally, you can disable the form inputs after a successful update
+          this.inputsDisabled = true;
+          this.infoForm.disable();
+        },
+        (error) => {
+          console.error('Error updating user data:', error);
+          // Handle error as needed
+        }
+      );
+    }
   }
 }

@@ -61,6 +61,11 @@
             </div>
           </div>
         </div>
+        <div>
+
+          <app-commentaire [commentaires]="commentaires" (miseAJourCommentaires)="rafraichirCommentaires()"></app-commentaire>
+
+        </div>
       </div>
     </div>
   </div>

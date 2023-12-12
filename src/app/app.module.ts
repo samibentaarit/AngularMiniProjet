@@ -34,7 +34,12 @@ import { Register1Component } from './pages/Auth/oldregister/register1.component
 import { Login1Component } from './pages/Auth/oldlogin/login1.component';
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
-import {SuggestionDialog, SuggestionEditDialog, SuggestionsComponent} from './pages/suggestions/suggestions.component';
+import {
+  CommentComponent,
+  SuggestionDialog,
+  SuggestionEditDialog,
+  SuggestionsComponent
+} from './pages/suggestions/suggestions.component';
 import { DetailsfoyerComponent } from './pages/detailsfoyer/detailsfoyer.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
@@ -44,7 +49,6 @@ import {BlocDetailsComponent} from "./pages/bloc/bloc-details/bloc-details.compo
 import {ClubComponent, ClubDialog, ClubEditDialog} from "./pages/club/club.component";
 import {UniversiteComponent, UniversiteDialog, UniversiteEditDialog} from "./pages/universite/universite.component";
 import {CommentaireComponent, DetailUniversiteComponent} from "./pages/detail-universite/detail-universite.component";
-
 
 @NgModule({
     imports: [
@@ -101,7 +105,7 @@ import {CommentaireComponent, DetailUniversiteComponent} from "./pages/detail-un
       Login1Component,
 
       EtudiantEditDialog,
-      EtudiantDialog,  
+      EtudiantDialog,
       AuthLayoutComponent,
       BlocComponent,
       FoyerComponent,
@@ -127,6 +131,7 @@ import {CommentaireComponent, DetailUniversiteComponent} from "./pages/detail-un
      CommentaireComponent,
      ClubEditDialog,
       DetailUniversiteComponent,
+    CommentComponent,
     ],
   providers:
     [ChambreService, EquipementService],

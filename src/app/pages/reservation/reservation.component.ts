@@ -16,6 +16,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { Reservation } from 'src/app/models/reservation';
 import { Chambre } from 'src/app/models/chambre';
 import { Restaurant } from 'src/app/models/restaurant';
+import { ActivatedRoute } from '@angular/router';
+import { RestaurantService } from 'src/app/services/restaurant.service';
+
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
@@ -23,14 +26,50 @@ import { Restaurant } from 'src/app/models/restaurant';
 })
 export class ReservationComponent {
   reservations: Reservation[]; // Change the type to match your Universite model.
+  idRestaurant: number;
+  restaurant:Restaurant;
+  filteredReservations: any[] = [];
+
 
   constructor(
-    private reservationService: ReservationService
-    ,public dialog: MatDialog) {}
+    private reservationService: ReservationService,
+    private restaurantService: RestaurantService
+
+    ,public dialog: MatDialog,
+    private route: ActivatedRoute
+    ) {}
+    
 
   ngOnInit() {
     this.getAllReservations();
     console.log("reservation",this.reservations)
+
+
+
+    
+    this.route.params.subscribe(params => {
+      this.idRestaurant = +params['id']; // Convert id to a number
+console.log("ID RESTAURANT"+this.idRestaurant)
+
+
+  this.restaurantService.getRestaurantById(this.idRestaurant).subscribe(
+    (data: any) => {
+      this.restaurant = data; // Assuming your service returns an array of Universite objects.
+      console.log("restaurant55",this.restaurant)
+
+      this.filteredReservations = this.restaurant.reservations ; 
+      console.log(this.filteredReservations)
+    
+      
+
+    },
+    (error) => {
+      console.error('Error loading restaurant: ', error);
+    }
+  );
+
+});
+    
   }
   refresh() {
     this.getAllReservations();
@@ -160,33 +199,36 @@ export class ReservationDialog implements OnInit {
 
   reservationForm: FormGroup;
   chambres:Chambre[] = [];
+  idRestaurant: number;
+
 
   constructor(
     public dialogRef: MatDialogRef<ReservationDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: Reservation,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private reservationService: ReservationService,
     private chambreService: ChambreService,
+    private route: ActivatedRoute
+
+    
 
   ) {}
 
   ngOnInit(): void {
-    this.chambreService.getAllChambres().subscribe(
-      (foyers) => {
-        this.chambres =this.chambres;
-      },
-      (error) => {
-        console.error(error);
-        // Handle error here
-      }
-    );
+  
 
     // Create the form group with custom validation for required fields
     this.reservationForm= this.formBuilder.group({
-      nomUniversite: [this.data.anneeUniversitaire, Validators.required],
-      adresse: [this.data.estValide, Validators.required],
-      foyer: [this.data.chambre, Validators.required], // Add the foyer field with appropriate validation
+      anneeUniversitaire: [this.data.anneeUniversitaire],
     });
+
+    this.route.params.subscribe(params => {
+      console.log("Route Parameters:", params);
+
+      this.idRestaurant = +params['id']; // Convert id to a number
+console.log("ID",this.idRestaurant)});
+
+    
   }
 
 
@@ -194,14 +236,15 @@ export class ReservationDialog implements OnInit {
     if (this.reservationForm.invalid) {
       return;
     }
-    // Customize the submission logic for adding a universite
-    const reservation: {chambre:Chambre;  anneeUniversitaire: Date; estValide: boolean; } = {
-      anneeUniversitaire : this.data.anneeUniversitaire,
-      estValide: this.data.estValide,
-      chambre:this.data.chambre
+
+    const reservationData = this.reservationForm.value;
+    const reservationPayload = {
+      
+      anneeUni: reservationData.anneeUni,
+
     };
 
-    this.reservationService.addReservation(reservation).subscribe((res: any) => {
+    this.reservationService.addReservation(reservationData).subscribe((res: any) => {
       this.dialogRef.close();
     });
   }

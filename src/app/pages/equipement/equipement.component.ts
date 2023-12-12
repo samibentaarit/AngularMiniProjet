@@ -61,6 +61,8 @@ export class EquipementComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.addEquipement(result);
+
+        this.loadEquipements();
       }
     });
   }
@@ -74,6 +76,7 @@ export class EquipementComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.updateEquipement(id, result);
+        this.loadEquipements();
       }
     });
   }
@@ -103,8 +106,9 @@ export class EquipementComponent implements OnInit {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.equipementService.addEquipement(equipement)
       .pipe(
-        catchError(this.handleError)
+        catchError(this.handleError),
       );
+      
   }
 
   updateEquipement(id: number, equipement: Equipement): Observable<Equipement> {

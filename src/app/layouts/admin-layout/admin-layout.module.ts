@@ -31,6 +31,10 @@ import {
   ReservationEditDialog
 } from "../../pages/reservation/reservation.component";
 import { UsersComponent } from 'src/app/pages/Auth/users/users.component';
+import { SelectRoleComponent } from 'src/app/pages/Auth/select-role/select-role.component';
+import { DarkThemeDirective } from 'src/app/directives/dark-theme.directive';
+import { HoverHighlightDirective } from 'src/app/directives/hover-highlight.directive';
+import { TooltipDirective } from 'src/app/directives/tooltip.directive';
 
 @NgModule({
   imports: [
@@ -67,7 +71,11 @@ import { UsersComponent } from 'src/app/pages/Auth/users/users.component';
     ReservationComponent,
     ReservationDialog,
     ReservationEditDialog,
-    UsersComponent
+    UsersComponent,
+    SelectRoleComponent,
+    DarkThemeDirective,
+    HoverHighlightDirective,
+
   ]
 })
 

@@ -31,35 +31,34 @@ import { ReservationComponent, ReservationDialog } from 'src/app/pages/reservati
 export const AdminLayoutRoutes: Routes = [
         //USER GUARDS
     { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
+
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
-    { path: 'etudiant',           component: EtudiantComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path :'club', component: ClubComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'detail/:id', component: DetailUniversiteComponent },
+    { path: 'etudiant',           component: EtudiantComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path :'club', component: ClubComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'detail/:id', component: DetailUniversiteComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
    
-    { path: 'bloc',          component:BlocComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'bibliotheque/:idBloc', component: BibliothequeComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'bloc-details/:idBloc', component: BlocDetailsComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'chambre',           component: ChambreComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'equipement',           component: EquipementComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'chambre-details/:id', component: ChambreDetailsComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
+    { path: 'bloc',          component:BlocComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'bibliotheque/:idBloc', component: BibliothequeComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'bloc-details/:idBloc', component: BlocDetailsComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'chambre',           component: ChambreComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'chambre-details/:id', component: ChambreDetailsComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
     { path: 'maps',           component: MapsComponent },
-    { path: 'foyer',          component:FoyerComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'bloc/:idFoyer', component: BlocComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'foyer/consulterblocs/:idFoyer', component: DetailsfoyerComponent ,  canActivate:[AuthentificationGuard,UserGuard]  },
-    { path: 'foyer/suggestion/:idFoyer',          component:SuggestionsComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'res/:id',           component: ReservationComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'restau',           component: RestaurantComponent ,  canActivate:[AuthentificationGuard,UserGuard] },
-    { path: 'receive/:id',           component: ReservationDialog ,  canActivate:[AuthentificationGuard,UserGuard] },
+    { path: 'foyer',          component:FoyerComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'bloc/:idFoyer', component: BlocComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'foyer/consulterblocs/:idFoyer', component: DetailsfoyerComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard]  },
+    { path: 'foyer/suggestion/:idFoyer',          component:SuggestionsComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'res/:id',           component: ReservationComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'restau',           component: RestaurantComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'receive/:id',           component: ReservationDialog ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'user-profile',   component: UserProfileComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'uni',           component: UniversiteComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
 
         //ADMIN GUARDS
-    { path: 'users',    component:UsersComponent,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
+    { path: 'users',    component:UsersComponent,  canActivate:[AuthentificationGuard,AdminGuard] },
+    { path: 'equipement',           component: EquipementComponent ,  canActivate:[AuthentificationGuard,AdminGuard] },
 
-
-    //// AdminOrUserGuard
-    { path: 'uni',           component: UniversiteComponent ,  canActivate:[AuthentificationGuard,AdminOrUserGuard] },
 
 ];
 

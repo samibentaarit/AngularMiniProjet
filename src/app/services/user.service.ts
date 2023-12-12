@@ -28,7 +28,30 @@ export class UserService {
     return this.http.put<User>(`${this.apiUrl}/users/${user.id}`, user);
   }
 
-  deleteUser(userId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/users/${userId}`);
+  deleteUser(userId: number): Observable<any> {
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${authToken}`);
+  
+    const url = `${environment.url}/delete/${userId}`;
+  
+    return this.http.delete(url, { headers });
   }
+
+  setUserRoleToAdmin(userId: number, role: string): Observable<any> {
+    const authToken = sessionStorage.getItem('authToken');
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${authToken}`);
+    
+    const url = `${environment.url}/users/role/`+userId;
+  
+    return this.http.patch(url, role , { headers });
+  }
+  
+
+
+
+
 }

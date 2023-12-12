@@ -18,7 +18,7 @@ export class ChambreService {
     const authToken = sessionStorage.getItem('authToken');
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
-    return this.http.get<Chambre[]>(environment.url + '/chambre', { headers });
+    return this.http.get<Chambre[]>(`${environment.url}/chambre`, { headers });
   }
 
   getChambreById(id: string): Observable<Chambre> {

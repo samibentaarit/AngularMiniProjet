@@ -14,7 +14,7 @@ export class UserprofileService {
   updateUserData(id: number, updatedUser: User): Observable<User> {
     const authToken = sessionStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', `Bearer ${authToken}`);
-    return this.http.patch<User>(environment.url + '/users/' + id, updatedUser, { headers });
+    return this.http.patch<User>(environment.url + '/updateUserData/' + id, updatedUser, { headers });
   }
 
 

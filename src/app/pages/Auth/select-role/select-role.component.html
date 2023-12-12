@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-md-8">
+      <h2 class="mb-4">Changer le role de l'utilisateur avec ID: {{userId}}</h2>
+    </div>
+
+    <div class="col-md-4">
+      <form [formGroup]="roleForm" (ngSubmit)="setRole()" class="d-flex">
+        <div class="form-group mr-3">
+          <select class="form-control" id="selectedRole" formControlName="selectedRole">
+            <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Set Role</button>
+      </form>
+    </div>
+  </div>
+</div>

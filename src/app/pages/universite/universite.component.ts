@@ -30,6 +30,7 @@ export class UniversiteComponent implements OnInit {
   filteredUniversites: Universite[];
   clubs : Club [] ;
 foyer : Foyer ;
+  focus = false;
 
   constructor(
     private universiteService: UniversiteService

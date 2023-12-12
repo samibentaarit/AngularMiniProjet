@@ -16,6 +16,7 @@ export class RegisterComponent {
   email: string;
   password: string;
   role: string;
+  passwordStrength: string = 'weak'; // Added variable to store password strength dynamically
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +35,16 @@ export class RegisterComponent {
   get f() {
     return this.registerForm.controls;
   }
+  checkPasswordStrength() {
+    const password = this.registerForm.get('password').value;
+    const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
+    if (strongRegex.test(password)) {
+      this.passwordStrength = 'strong'; // Set password strength dynamically
+    } else {
+      this.passwordStrength = 'weak'; // Set password strength dynamically
+    }
+  }
   onSubmit() {
     if (this.registerForm.valid) {
       this.authService.register(this.firstName, this.lastName, this.email, this.password, this.role)
@@ -48,13 +58,4 @@ export class RegisterComponent {
       });
   }
 }
-
-
-////////////////////////////////////
-
-
-
-
 }
-
-

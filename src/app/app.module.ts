@@ -49,6 +49,8 @@ import {BlocDetailsComponent} from "./pages/bloc/bloc-details/bloc-details.compo
 import {ClubComponent, ClubDialog, ClubEditDialog} from "./pages/club/club.component";
 import {UniversiteComponent, UniversiteDialog, UniversiteEditDialog} from "./pages/universite/universite.component";
 import {CommentaireComponent, DetailUniversiteComponent} from "./pages/detail-universite/detail-universite.component";
+import { HoverHighlightDirective } from './directives/hover-highlight.directive';
+import { TooltipDirective } from './directives/tooltip.directive';
 
 @NgModule({
     imports: [
@@ -132,7 +134,8 @@ import {CommentaireComponent, DetailUniversiteComponent} from "./pages/detail-un
      ClubEditDialog,
       DetailUniversiteComponent,
     CommentComponent,
-    ],
+    
+      ],
   providers:
     [ChambreService, EquipementService],
   bootstrap: [AppComponent]

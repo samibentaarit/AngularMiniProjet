@@ -111,6 +111,7 @@ logout(): void {
   sessionStorage.removeItem('role');
   sessionStorage.removeItem('email');
   sessionStorage.removeItem('authToken');
+  sessionStorage.removeItem('id');
   this.router.navigate(['/login']); 
 
 }

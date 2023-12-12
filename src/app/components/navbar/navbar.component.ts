@@ -15,7 +15,8 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public location: Location;
   userRole: string | null = null;
-
+  lastName: string | null = null;
+  firstName: string | null = null;
   constructor(private authService: Auth1Service,location: Location,  private element: ElementRef, private router: Router ,private searchService: SearchService) {
     this.location = location;
   }
@@ -26,6 +27,8 @@ export class NavbarComponent implements OnInit {
     this.userRole = sessionStorage.getItem('role');
 
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.lastName = sessionStorage.getItem('lastName');
+    this.firstName = sessionStorage.getItem('firstName');
   }
 
   getTitle(): string {
@@ -37,6 +40,11 @@ export class NavbarComponent implements OnInit {
       return 'Default Title'; // You can set a default title for other roles or when the role is not defined
     }
   }
+  logout(){
+    this.authService.logout();
+
+  }
+
 }
   /*
   getTitle(){

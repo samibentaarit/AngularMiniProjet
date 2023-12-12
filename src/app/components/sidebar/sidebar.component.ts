@@ -34,6 +34,19 @@ export class SidebarComponent implements OnInit {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
+      this.updateMenuItems()
    });
+  }
+
+  private updateMenuItems() {
+    this.menuItems = ROUTES.filter(menuItem => {
+      if (menuItem.path === '/login' || menuItem.path === '/register') {
+        return !this._is_logged(); // Hide login and register if logged in
+      }
+      return true; // Show other routes
+    });
+  }
+  _is_logged(): boolean {
+    return !!sessionStorage.getItem("authToken");
   }
 }

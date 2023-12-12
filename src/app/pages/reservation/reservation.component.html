@@ -2,27 +2,29 @@
   <div class="container-fluid">
     <div class="header-body">
       <!-- Table -->
+
       <div class="row">
         <div class="col">
           <div class="card shadow">
-            <div class="card-header bg-white border-0">
+            <div class="card-header bg-gradient-pink border-0">
               <div class="row align-items-center">
                 <div class="col-8">
                   <h3 class="mb-0">reservations</h3>
                 </div>
 
                 <div class="col-4 text-right">
-                  <button type="button" class="btn btn-info" style="background-color: green;" (click)="openDialog()">
+                  <button type="button" class="btn btn-primary" style="background-color: green;" (click)="openDialog()">
                     <i class="fas fa-plus" style="margin-right: 10px;"></i>Ajouter un reservation
                   </button>
                 </div>
               </div>
             </div>
+            <div class="bg-gradient-pink">
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
-                <thead class="thead-light">
+                <thead class="bg-gradient-pink">
                 <tr>
-                  <th scope="col">ID</th>
+                  <th scope="col" class="d-none">ID</th>
                   <th scope="col">anneeUniversitaire</th>
                   <th scope="col">Validiter</th>
                   <th scope="col">Restaurant</th>
@@ -33,7 +35,7 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let reservation of reservations">
-                  <th scope="row">{{ reservation.idReservation }}</th>
+                  <th scope="row" class="d-none">{{ reservation.idReservation }}</th>
                   <td>{{ reservation.anneeUniversitaire }}</td>
                   <td>{{ reservation.estValide }}</td>
                   <td>{{ reservation.restaurant ? reservation.restaurant.nomRestaurant : 'N/A' }}</td>
@@ -42,8 +44,12 @@
 
                   <td>
 
-                    <button class="btn btn-info" (click)="openEditDialog">Edit</button>
-                    <button class="btn btn-info" style="background-color: red;" (click)="deleteReservation(reservation.idReservation)">Delete</button >
+                    <button type="button" class="btn btn-sm btn-primary" (click)="openEditDialog">
+                      <i class="fas fa-pencil-alt"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger"(click)="deleteReservation(reservation.idReservation)">
+                      <i class="fas fa-trash"></i>
+                    </button >
 
                   </td>
                 </tr>
@@ -59,4 +65,5 @@
 
     </div>
   </div>
+</div>
 </div>

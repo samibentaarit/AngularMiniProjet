@@ -22,7 +22,7 @@
               <table class="table align-items-center table-flush">
                 <thead class="bg-gradient-pink">
                 <tr>
-                  <th scope="col">ID</th>
+                  <th scope="col" class="d-none">ID</th>
                   <th scope="col">Titre bibliothèque</th>
                   <th scope="col">Description Bibliothèque</th>
                   <th scope="col"></th>
@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                 <tr *ngIf="bibliothequeAssociee">
-                  <th scope="row">{{ bibliothequeAssociee.idBibliotheque }}</th>
+                  <th scope="row" class="d-none">{{ bibliothequeAssociee.idBibliotheque }}</th>
                   <td>{{ bibliothequeAssociee.titreBibliotheque }}</td>
                   <td>{{ bibliothequeAssociee.descriptionBibliotheque }}</td>
                   <td class="text-right buttons-column">

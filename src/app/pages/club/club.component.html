@@ -1,16 +1,22 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <div class="col-md-6">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Rechercher par nom club" [(ngModel)]="searchTerm" (input)="search()">
+      <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto mb-4">
+        <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+          <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+            <input class="form-control" placeholder="Rechercher par nom club" type="text" (focus)="focus = true"
+                   (blur)="focus = false" [(ngModel)]="searchTerm" (input)="search()" >
+          </div>
         </div>
-      </div>
+      </form>
       <!-- Add Club Button -->
       <div class="row">
         <div class="col">
           <div class="d-flex justify-content-between align-items-center mb-4">
-            <button type="button" class="btn btn-info" (click)="openDialog()">
+            <button type="button" class="btn btn-primary" (click)="openDialog()">
               <i class="fas fa-plus" style="margin-right: 10px;"></i> Ajouter un Club
             </button>
           </div>
@@ -22,7 +28,7 @@
           <div class="card mb-4" [ngClass]="{'bg-gradient-pink': !club.isZoomed, 'zoomed-card': club.isZoomed}">
             <div class="card-body">
               <h2 class="card-title">Club Details</h2>
-              <p class="card-text">ID: {{ club.idClub }}</p>
+              <p class="card-text d-none ">ID: {{ club.idClub }}</p>
               <p class="card-text">Club Name: {{ club.nomClub }}</p>
               <p class="card-text">Creation Date: {{ club.dateCreation | date }}</p>
               <p class="card-text">Social Link: {{ club.lienSocial }}</p>
@@ -31,19 +37,20 @@
 
               <!-- Club Action Buttons -->
               <div class="card-footer bg-transparent border-0">
-                <!-- Edit Button -->
-                <button mat-raised-button color="primary" style="background-color: #4CAF50; margin-right: 10px;" (click)="openEditDialog(club.idClub, club.nomClub, club.dateCreation, club.lienSocial)">Edit</button>
+                <!-- Edit Button with icon -->
+                <button type="button" class="btn  btn-sm btn-primary" (click)="openEditDialog(club.idClub, club.nomClub, club.dateCreation, club.lienSocial)">
+                  <i class="fas fa-pencil-alt" style="margin-right: 5px;"></i>
+                </button>
 
-                <!-- Delete Button -->
-                <button mat-raised-button color="warn" style="background-color: #FF0000;" (click)="deleteClub(club.idClub)">Delete</button>
+                <!-- Delete Button with icon -->
+                <button type="button" class="btn btn-sm btn-danger"  (click)="deleteClub(club.idClub)">
+                  <i class="fas fa-trash" style="margin-right: 5px;"></i>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
-
     </div>
   </div>
 </div>

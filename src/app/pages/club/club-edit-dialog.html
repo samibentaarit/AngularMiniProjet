@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Modifier le club</h2>
+<h2 mat-dialog-title class="bg-gradient-pink">Modifier le club</h2>
 
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content class="bg-gradient-pink">
   <form [formGroup]="clubForm">
     <div class="form-group">
       <label for="nomClub">Nom du club</label>
@@ -18,7 +18,7 @@
   </form>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="end"class="bg-gradient-pink">
   <button class="btn btn-danger" (click)="onCancel()" style="margin-right: 6px">Annuler</button>
   <button class="btn btn-success" (click)="submitEdit()" [disabled]="clubForm.invalid">Enregistrer</button>
 </mat-dialog-actions>

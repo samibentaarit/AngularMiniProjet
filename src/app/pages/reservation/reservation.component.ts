@@ -233,21 +233,19 @@ console.log("ID",this.idRestaurant)});
 
 
   submit() {
-    console.log("submit",this.idRestaurant)
     if (this.reservationForm.invalid) {
       return;
     }
-    // Customize the submission logic for adding a universite
-    const reservation: {  idRestaurant: any; anneeUniversitaire: Date } = {
-      idRestaurant: this.idRestaurant,
-      anneeUniversitaire : this.data.anneeUniversitaire,
+
+    const reservationData = this.reservationForm.value;
+    const reservationPayload = {
+      
+      anneeUni: reservationData.anneeUni,
 
     };
 
-    this.reservationService.addReservationToRestaurant(this.idRestaurant,reservation).subscribe((res: any) => {
+    this.reservationService.addReservation(reservationData).subscribe((res: any) => {
       this.dialogRef.close();
-      console.log(res.text); // Accès au texte de la réponse
-
     });
   }
 
